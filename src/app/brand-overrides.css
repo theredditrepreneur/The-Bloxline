@@ -52,6 +52,32 @@
   padding-right: clamp(28px, 5vw, 72px);
 }
 
+.article-header {
+  width: 100%;
+  max-width: 1040px;
+  padding-top: clamp(42px, 5vw, 64px);
+  padding-bottom: 30px;
+}
+
+.article-header h1 {
+  max-width: 980px;
+  font-size: clamp(2.65rem, 4.6vw, 4.75rem);
+  line-height: 1.03;
+  text-wrap: balance;
+}
+
+.article-header .subtitle {
+  max-width: 850px;
+  margin: 20px 0 8px;
+  line-height: 1.45;
+}
+
+.article-hero {
+  width: 100%;
+  max-width: 980px;
+  margin-bottom: 52px;
+}
+
 .homepage-lead {
   padding-top: clamp(24px, 3vw, 40px);
   padding-bottom: clamp(40px, 4vw, 56px);
@@ -98,7 +124,19 @@
 }
 
 .cover-image {
-  object-fit: cover;
+  object-fit: contain;
+}
+
+.cover-large,
+.article-card .cover {
+  aspect-ratio: 16 / 9;
+  background: #fff;
+}
+
+.article-card > a:first-child {
+  display: block;
+  overflow: hidden;
+  border: 1px solid var(--line);
 }
 
 .prose p {
@@ -129,6 +167,10 @@
   margin-top: 28px;
 }
 
+.follow-heading {
+  margin-top: 24px;
+}
+
 @media (max-width: 600px) {
   .page-head {
     padding-left: 28px;
@@ -141,6 +183,10 @@
   .legal {
     padding-left: 24px;
     padding-right: 24px;
+  }
+
+  .article-header h1 {
+    font-size: clamp(2.35rem, 11vw, 3.5rem);
   }
 
   .footer-grid > div:first-child > p {

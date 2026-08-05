@@ -60,7 +60,12 @@ export const siteSettingsQuery = defineQuery(/* groq */ `
     "headerLogo": headerLogo.asset->url,
     "footerLogo": footerLogo.asset->url,
     "favicon": favicon.asset->url,
-    "socialImage": socialImage.asset->url
+    "socialImage": socialImage.asset->url,
+    instagram,
+    youtube,
+    tiktok,
+    facebook,
+    linkedin
   }
 `)
 

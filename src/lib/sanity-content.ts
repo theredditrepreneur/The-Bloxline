@@ -14,6 +14,11 @@ type SiteSettingsDocument = {
   footerLogo?: string | null
   favicon?: string | null
   socialImage?: string | null
+  instagram?: string | null
+  youtube?: string | null
+  tiktok?: string | null
+  facebook?: string | null
+  linkedin?: string | null
 }
 
 export type StartHereStep = {_key: string; title: string; description: string; linkLabel: string; href?: string}
@@ -67,6 +72,13 @@ export async function getSiteSettings(): Promise<SiteSettings> {
         favicon: settings.favicon || siteConfig.logos.favicon,
       },
       defaultSocialImage: settings.socialImage || undefined,
+      social: {
+        Instagram: settings.instagram || siteConfig.social.Instagram,
+        YouTube: settings.youtube || siteConfig.social.YouTube,
+        TikTok: settings.tiktok || siteConfig.social.TikTok,
+        Facebook: settings.facebook || siteConfig.social.Facebook,
+        LinkedIn: settings.linkedin || siteConfig.social.LinkedIn,
+      },
     }
   } catch (error) {
     console.error("Unable to load Sanity site settings.", error)
