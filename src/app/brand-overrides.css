@@ -61,6 +61,24 @@
   padding-top: clamp(40px, 4vw, 56px);
 }
 
+.featured .meta .byline::before,
+.article-header .meta .byline::before {
+  content: none;
+  margin: 0;
+}
+
+.featured .meta time::before,
+.article-header .meta time:first-of-type::before {
+  content: "•";
+  margin-right: 10px;
+}
+
+.start-intro p {
+  margin: 0 0 8px;
+  max-width: 700px;
+  font-size: 1.15rem;
+}
+
 .footer-grid > div:first-child > p {
   margin-top: 28px;
 }

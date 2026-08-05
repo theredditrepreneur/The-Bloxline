@@ -47,3 +47,36 @@ export const allArticlesIncludingEditorialDraftsQuery = defineQuery(/* groq */ `
 export const articleBySlugQuery = defineQuery(/* groq */ `
   *[_type == "article" && slug.current == $slug && draft != true][0]{${articleFields}}
 `)
+
+export const siteSettingsQuery = defineQuery(/* groq */ `
+  *[_id == "siteSettings"][0]{
+    name,
+    tagline,
+    description,
+    footerDescription,
+    founder,
+    contactEmail,
+    disclaimer,
+    "headerLogo": headerLogo.asset->url,
+    "footerLogo": footerLogo.asset->url,
+    "favicon": favicon.asset->url,
+    "socialImage": socialImage.asset->url
+  }
+`)
+
+export const startHerePageQuery = defineQuery(/* groq */ `
+  *[_id == "startHerePage"][0]{
+    label,
+    title,
+    introduction,
+    seoDescription,
+    steps[]{
+      _key,
+      title,
+      description,
+      linkLabel,
+      pagePath,
+      "articleSlug": article->slug.current
+    }
+  }
+`)

@@ -27,15 +27,22 @@ Use `npm run lint`, `npm run typecheck` and `npm run build` before publishing.
 
 The online editor is [the-bloxline.sanity.studio](https://the-bloxline.sanity.studio). Sign in with the GitHub account that has access to the Sanity project.
 
+The editor has four main areas:
+
+- **Site details** controls the publication title, tagline, descriptions, contact address, logos, favicon and default sharing image.
+- **Start Here page** controls the page heading, introduction and ordered reading journey.
+- **Articles** contains published articles and editorial drafts.
+- **Authors** contains reusable author details.
+
 1. Open **Article** and choose an existing article, or choose **Create** to add one.
 2. Complete the headline, article address, summary, body, author, date and desk.
 3. Upload a cover image that The Bloxline has permission to use and add useful alternative text.
 4. Keep **Keep off the public website** switched on while the article is being prepared.
 5. Complete the search title and search description.
 6. Publish the document in Sanity.
-7. When it is ready for readers, switch **Keep off the public website** off and publish once more.
+7. When it is ready for readers, switch **Keep off the public website** off and publish once more. Saved drafts are not shown on the public website until **Publish** is pressed.
 
-The website checks Sanity for updates every minute. New published articles keep the route `/articles/article-address`, so changing the domain does not change article links.
+The website uses Sanity live content updates. Published changes automatically clear the relevant website cache. New articles keep the route `/articles/article-address`, so changing the domain does not change article links.
 
 ## Run Sanity Studio locally
 

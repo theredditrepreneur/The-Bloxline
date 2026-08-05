@@ -34,7 +34,7 @@ export default async function Home() {
               <h2><Link href={`/articles/${featured.slug}`}>{featured.title}</Link></h2>
               <p className="summary">{featured.excerpt}</p>
               <div className="meta">
-                <span style={{ marginLeft: "-10px" }}>By {featured.author}</span>
+                <span className="byline">By {featured.author}</span>
                 <time dateTime={featured.publishedAt}>
                   {new Date(`${featured.publishedAt}T12:00:00`).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })}
                 </time>

@@ -1,4 +1,30 @@
-import type { Metadata } from "next"; import { Inter } from "next/font/google"; import "./globals.css"; import "./brand-overrides.css"; import { Header } from "@/components/Header"; import { Footer } from "@/components/Footer"; import { absoluteUrl, siteConfig } from "@/lib/site";
-const inter=Inter({subsets:["latin"],display:"swap"});
-export const metadata:Metadata={metadataBase:new URL(siteConfig.url),title:{default:`${siteConfig.name} | ${siteConfig.tagline}`,template:`%s | ${siteConfig.name}`},description:siteConfig.description,alternates:{canonical:"/"},icons:{icon:[{url:"/brand/bloxline-favicon.jpg",type:"image/jpeg"}],apple:"/brand/bloxline-favicon.jpg"},openGraph:{type:"website",siteName:siteConfig.name,title:siteConfig.name,description:siteConfig.description,images:[{url:absoluteUrl(siteConfig.defaultSocialImage),width:1254,height:434,alt:`${siteConfig.name}: ${siteConfig.tagline}`}]},twitter:{card:"summary_large_image",title:siteConfig.name,description:siteConfig.description,images:[siteConfig.defaultSocialImage]}};
-export default function RootLayout({children}:{children:React.ReactNode}){const org={"@context":"https://schema.org","@type":"NewsMediaOrganization",name:siteConfig.name,url:siteConfig.url,logo:absoluteUrl(siteConfig.logos.compact),founder:{"@type":"Person",name:siteConfig.founder},description:siteConfig.description};return <html lang="en-GB"><body className={inter.className}><a className="skip-link" href="#main">Skip to content</a><Header/><main id="main">{children}</main><Footer/><script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(org).replace(/</g,"\\u003c")}}/></body></html>}
+import type {Metadata} from "next"
+import {Inter} from "next/font/google"
+import "./globals.css"
+import "./brand-overrides.css"
+import {Header} from "@/components/Header"
+import {Footer} from "@/components/Footer"
+import {getSiteSettings} from "@/lib/sanity-content"
+import {SanityLive} from "@/sanity/live"
+
+const inter = Inter({subsets: ["latin"], display: "swap"})
+
+export async function generateMetadata(): Promise<Metadata> {
+  const settings = await getSiteSettings()
+  const socialImage = new URL(settings.defaultSocialImage, settings.url).toString()
+  return {
+    metadataBase: new URL(settings.url),
+    title: {default: `${settings.name} | ${settings.tagline}`, template: `%s | ${settings.name}`},
+    description: settings.description,
+    alternates: {canonical: "/"},
+    icons: {icon: [{url: settings.logos.favicon}], apple: settings.logos.favicon},
+    openGraph: {type: "website", siteName: settings.name, title: settings.name, description: settings.description, images: [{url: socialImage, width: 1254, height: 434, alt: `${settings.name}: ${settings.tagline}`}]},
+    twitter: {card: "summary_large_image", title: settings.name, description: settings.description, images: [socialImage]},
+  }
+}
+
+export default async function RootLayout({children}: {children: React.ReactNode}) {
+  const settings = await getSiteSettings()
+  const organisation = {"@context": "https://schema.org", "@type": "NewsMediaOrganization", name: settings.name, url: settings.url, logo: new URL(settings.logos.compact, settings.url).toString(), founder: {"@type": "Person", name: settings.founder}, description: settings.description}
+  return <html lang="en-GB"><body className={inter.className}><a className="skip-link" href="#main">Skip to content</a><Header name={settings.name} logo={settings.logos.compact}/><main id="main">{children}</main><Footer settings={settings}/><SanityLive/><script type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify(organisation).replace(/</g, "\\u003c")}}/></body></html>
+}

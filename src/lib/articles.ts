@@ -4,7 +4,7 @@ import matter from "gray-matter"
 import readingTime from "reading-time"
 import {toPlainText, type PortableTextBlock} from "@portabletext/react"
 import {z} from "zod"
-import {sanityClient} from "@/sanity/client"
+import {sanityFetch} from "@/sanity/live"
 import {allArticlesIncludingEditorialDraftsQuery, allArticlesQuery} from "@/sanity/queries"
 
 export const desks = ["Parents", "Industry", "Games", "Studios", "Education"] as const
@@ -65,9 +65,9 @@ function mapSanityArticle(document: Record<string, unknown>): Article | null {
 }
 
 export async function getAllArticles(includeDrafts = process.env.NODE_ENV !== "production"): Promise<Article[]> {
-  if (!sanityClient) return getLocalArticles(includeDrafts)
   try {
-    const documents = await sanityClient.fetch<Record<string, unknown>[]>(includeDrafts ? allArticlesIncludingEditorialDraftsQuery : allArticlesQuery, {}, {next: {revalidate: 60, tags: ["article"]}})
+    const result = await sanityFetch({query: includeDrafts ? allArticlesIncludingEditorialDraftsQuery : allArticlesQuery, perspective: "published", stega: false})
+    const documents = result.data as Record<string, unknown>[]
     const articles = documents.map(mapSanityArticle).filter((article): article is Article => article !== null)
     return articles.length ? articles : getLocalArticles(includeDrafts)
   } catch (error) {
