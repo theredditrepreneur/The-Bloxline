@@ -5,6 +5,7 @@ import {MDXRemote} from "next-mdx-remote/rsc"
 import {ArticleCard, ArticleCover} from "@/components/ArticleCard"
 import {Newsletter} from "@/components/Newsletter"
 import {SanityBody} from "@/components/SanityBody"
+import {ShareArticle} from "@/components/ShareArticle"
 import * as Callouts from "@/components/Callouts"
 import {getAllArticles, getArticle, getRelated} from "@/lib/articles"
 import {absoluteUrl, siteConfig} from "@/lib/site"
@@ -52,6 +53,7 @@ export default async function Page({params}: {params: Promise<{slug: string}>}) 
           <span className="meta-divider" aria-hidden="true">•</span>
           <span className="reading-time">{article.readingTime}</span>
         </div>
+        <ShareArticle title={article.title} url={absoluteUrl(`/articles/${article.slug}`)}/>
       </header>
       <div className="article-hero"><ArticleCover article={article} large/></div>
       <div className="article-layout">
