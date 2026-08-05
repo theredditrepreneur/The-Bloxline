@@ -11,7 +11,7 @@ export type SiteSettings = {
   contactEmail: string
   social: Record<string, string>
   logos: {horizontal: string; compact: string; favicon: string}
-  defaultSocialImage: string
+  defaultSocialImage?: string
   disclaimer: string
 }
 
@@ -25,7 +25,7 @@ export const siteConfig: SiteSettings = {
   contactEmail: process.env.NEXT_PUBLIC_CONTACT_EMAIL || "hello@thebloxline.com",
   social: {},
   logos: {horizontal: "/brand/bloxline-banner.jpg", compact: "/brand/bloxline-logo.jpg", favicon: "/brand/bloxline-favicon.jpg"},
-  defaultSocialImage: "/brand/bloxline-banner.jpg",
+  defaultSocialImage: undefined,
   disclaimer: "The Bloxline is an independent publication and is not affiliated with, endorsed by or operated by Roblox Corporation.",
 }
 

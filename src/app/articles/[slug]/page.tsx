@@ -23,8 +23,8 @@ export async function generateMetadata({params}: {params: Promise<{slug: string}
     title: article.seoTitle || article.title,
     description: article.seoDescription,
     alternates: {canonical: article.canonicalUrl || `/articles/${article.slug}`},
-    openGraph: {type: "article", title: article.title, description: article.seoDescription, publishedTime: article.publishedAt, modifiedTime: article.updatedAt, authors: [article.author], section: article.primaryDesk, images: [{url: article.coverImage, alt: article.coverAlt}]},
-    twitter: {card: "summary_large_image", title: article.title, description: article.seoDescription, images: [article.coverImage]},
+    openGraph: {type: "article", title: article.title, description: article.seoDescription, publishedTime: article.publishedAt, modifiedTime: article.updatedAt, authors: [article.author], section: article.primaryDesk, ...(article.coverImage ? {images: [{url: article.coverImage, alt: article.coverAlt || ""}]} : {images: []})},
+    twitter: {card: article.coverImage ? "summary_large_image" : "summary", title: article.title, description: article.seoDescription, ...(article.coverImage ? {images: [article.coverImage]} : {images: []})},
   }
 }
 
@@ -35,7 +35,7 @@ export default async function Page({params}: {params: Promise<{slug: string}>}) 
   const article = await getArticle(slug)
   if (!article) notFound()
   const related = await getRelated(article)
-  const articleJson = {"@context": "https://schema.org", "@type": "NewsArticle", headline: article.title, description: article.seoDescription, datePublished: article.publishedAt, dateModified: article.updatedAt || article.publishedAt, mainEntityOfPage: absoluteUrl(`/articles/${article.slug}`), author: {"@type": "Person", name: article.author}, publisher: {"@type": "NewsMediaOrganization", name: siteConfig.name, logo: {"@type": "ImageObject", url: absoluteUrl(siteConfig.logos.compact)}}, image: article.coverImage.startsWith("http") ? article.coverImage : absoluteUrl(article.coverImage)}
+  const articleJson = {"@context": "https://schema.org", "@type": "NewsArticle", headline: article.title, description: article.seoDescription, datePublished: article.publishedAt, dateModified: article.updatedAt || article.publishedAt, mainEntityOfPage: absoluteUrl(`/articles/${article.slug}`), author: {"@type": "Person", name: article.author}, publisher: {"@type": "NewsMediaOrganization", name: siteConfig.name, logo: {"@type": "ImageObject", url: absoluteUrl(siteConfig.logos.compact)}}, ...(article.coverImage ? {image: article.coverImage.startsWith("http") ? article.coverImage : absoluteUrl(article.coverImage)} : {})}
   const crumbs = {"@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [{"@type": "ListItem", position: 1, name: "Home", item: siteConfig.url}, {"@type": "ListItem", position: 2, name: article.primaryDesk, item: absoluteUrl(`/${article.primaryDesk.toLowerCase()}`)}, {"@type": "ListItem", position: 3, name: article.title, item: absoluteUrl(`/articles/${article.slug}`)}]}
 
   return <>

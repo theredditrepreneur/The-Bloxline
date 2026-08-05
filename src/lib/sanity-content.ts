@@ -66,7 +66,7 @@ export async function getSiteSettings(): Promise<SiteSettings> {
         compact: settings.headerLogo || siteConfig.logos.compact,
         favicon: settings.favicon || siteConfig.logos.favicon,
       },
-      defaultSocialImage: settings.socialImage || settings.footerLogo || siteConfig.defaultSocialImage,
+      defaultSocialImage: settings.socialImage || undefined,
     }
   } catch (error) {
     console.error("Unable to load Sanity site settings.", error)

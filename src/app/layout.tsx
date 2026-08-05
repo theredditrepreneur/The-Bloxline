@@ -11,15 +11,15 @@ const inter = Inter({subsets: ["latin"], display: "swap"})
 
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getSiteSettings()
-  const socialImage = new URL(settings.defaultSocialImage, settings.url).toString()
+  const socialImage = settings.defaultSocialImage ? new URL(settings.defaultSocialImage, settings.url).toString() : undefined
   return {
     metadataBase: new URL(settings.url),
     title: {default: `${settings.name} | ${settings.tagline}`, template: `%s | ${settings.name}`},
     description: settings.description,
     alternates: {canonical: "/"},
     icons: {icon: [{url: settings.logos.favicon}], apple: settings.logos.favicon},
-    openGraph: {type: "website", siteName: settings.name, title: settings.name, description: settings.description, images: [{url: socialImage, width: 1254, height: 434, alt: `${settings.name}: ${settings.tagline}`}]},
-    twitter: {card: "summary_large_image", title: settings.name, description: settings.description, images: [socialImage]},
+    openGraph: {type: "website", siteName: settings.name, title: settings.name, description: settings.description, ...(socialImage ? {images: [{url: socialImage, width: 1254, height: 434, alt: `${settings.name}: ${settings.tagline}`}]} : {})},
+    twitter: {card: socialImage ? "summary_large_image" : "summary", title: settings.name, description: settings.description, ...(socialImage ? {images: [socialImage]} : {})},
   }
 }
 
