@@ -32,3 +32,49 @@
     left: -7px;
   }
 }
+
+/* Keep page and article copy comfortably away from every screen edge. */
+.page-head {
+  padding-left: clamp(32px, 5vw, 96px);
+  padding-right: clamp(32px, 5vw, 96px);
+}
+
+.page-head > div {
+  width: 100%;
+  max-width: 1280px;
+}
+
+.article-header,
+.article-hero,
+.article-layout,
+.legal {
+  padding-left: clamp(28px, 5vw, 72px);
+  padding-right: clamp(28px, 5vw, 72px);
+}
+
+.homepage-lead {
+  padding-top: clamp(48px, 6vw, 80px);
+}
+
+.footer-grid > div:first-child > p {
+  margin-top: 28px;
+}
+
+@media (max-width: 600px) {
+  .page-head {
+    padding-left: 28px;
+    padding-right: 28px;
+  }
+
+  .article-header,
+  .article-hero,
+  .article-layout,
+  .legal {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .footer-grid > div:first-child > p {
+    margin-top: 22px;
+  }
+}
