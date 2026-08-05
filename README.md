@@ -7,11 +7,12 @@ The Bloxline is **The Adult’s Guide to Roblox**: an independent publication ex
 - Next.js 16 App Router and React 19
 - TypeScript
 - Tailwind CSS 4, with a publication specific CSS system
-- Local MDX articles with Zod frontmatter validation
+- Sanity Studio for adding and editing articles
+- Local MDX articles as a safe fallback and migration archive
 - Static generation for articles and editorial pages
 - Vercel ready metadata, sitemap, robots and RSS
 
-No CMS, database, authentication, payments or tracking are included in Version 1. The public components consume a typed article interface so local files can later be replaced by a CMS adapter.
+Sanity is the content editor. Payments and tracking are not included. The public website reads published articles from Sanity and falls back to the local MDX files if Sanity cannot be reached.
 
 ## Run locally
 
@@ -22,13 +23,36 @@ No CMS, database, authentication, payments or tracking are included in Version 1
 
 Use `npm run lint`, `npm run typecheck` and `npm run build` before publishing.
 
-## Publish an article manually
+## Edit or publish an article with Sanity
+
+The online editor is [the-bloxline.sanity.studio](https://the-bloxline.sanity.studio). Sign in with the GitHub account that has access to the Sanity project.
+
+1. Open **Article** and choose an existing article, or choose **Create** to add one.
+2. Complete the headline, article address, summary, body, author, date and desk.
+3. Upload a cover image that The Bloxline has permission to use and add useful alternative text.
+4. Keep **Keep off the public website** switched on while the article is being prepared.
+5. Complete the search title and search description.
+6. Publish the document in Sanity.
+7. When it is ready for readers, switch **Keep off the public website** off and publish once more.
+
+The website checks Sanity for updates every minute. New published articles keep the route `/articles/article-address`, so changing the domain does not change article links.
+
+## Run Sanity Studio locally
+
+1. Open the `studio` folder.
+2. Run `npm install`.
+3. Copy `studio/.env.example` to `studio/.env`.
+4. Run `npm run dev` and open `http://localhost:3333`.
+
+Run `npm run build` inside `studio` before deploying editor changes. Run `npm run deploy` to update the hosted editor after changing its fields or layout.
+
+## Local MDX fallback
 
 1. Copy `content/articles/_template.mdx` to `content/articles/your-slug.mdx`.
 2. Make the `slug` exactly match the filename.
 3. Write the article in MDX and use the provided callouts where helpful.
 4. Add a licensed cover image to `public/covers`, then update `coverImage` and `coverAlt`.
-5. Keep `draft: true` while editing. Drafts appear locally but are excluded from production.
+5. Keep `draft: true` while editing. Drafts stay off the production website.
 6. Run `npm run build`. Invalid or incomplete frontmatter stops the build with the affected filename.
 7. Preview locally, change to `draft: false`, commit and deploy.
 
@@ -36,7 +60,7 @@ Set `featured: true` to place a published article in the homepage lead slot. Kee
 
 Supported frontmatter includes title, slug, subtitle, excerpt, dates, author, desk, topics, cover information, featured and draft states, SEO fields, canonical URL, source links, disclosure and audience relevance notes. Reading time is generated when it is omitted.
 
-Available MDX callouts: `WhatAdultsNeedToKnow`, `WhyItMatters`, `ForParents`, `ForTeachers`, `BusinessAngle`, `InPlainEnglish`, `KeyTakeaways`, `BloxlineView` and `EditorNote`.
+Available MDX callouts: `WhatAdultsNeedToKnow`, `WhyItMatters`, `ForParents`, `ForTeachers`, `BusinessAngle`, `InPlainEnglish`, `KeyTakeaways`, `BloxlineView` and `EditorNote`. Sanity offers the same callout choices in its article editor.
 
 ## Editorial checklist
 
@@ -91,9 +115,10 @@ No analytics run by default. Vercel Analytics can later be added with its offici
 1. Push the repository to GitHub.
 2. In Vercel, choose **Add New → Project** and import the repository.
 3. Accept the detected Next.js settings.
-4. Add `NEXT_PUBLIC_SITE_URL` only when the permanent production origin is known. Preview deployments work without it.
-5. Optionally add `NEXT_PUBLIC_CONTACT_EMAIL` and `NEWSLETTER_WEBHOOK_URL`.
-6. Deploy, then check `/robots.txt`, `/sitemap.xml`, `/rss.xml`, a published article and a search query.
+4. Set `NEXT_PUBLIC_SITE_URL` to `https://www.thebloxline.com`.
+5. Set `NEXT_PUBLIC_SANITY_PROJECT_ID` to `ce0b69vh` and `NEXT_PUBLIC_SANITY_DATASET` to `production`. The project ID also has a code fallback, but setting it in Vercel keeps the connection explicit.
+6. Optionally add `NEXT_PUBLIC_CONTACT_EMAIL` and `NEWSLETTER_WEBHOOK_URL`.
+7. Deploy, then check `/robots.txt`, `/sitemap.xml`, `/rss.xml`, a published article and a search query.
 
 ## Connect thebloxline.com later
 
@@ -106,6 +131,8 @@ No analytics run by default. Vercel Analytics can later be added with its offici
 7. Open `/sitemap.xml` and confirm URLs use the new domain, then submit it to relevant webmaster tools.
 8. Test the homepage and article Open Graph previews using current social preview tools.
 
-## Future migration
+## How the content connection works
 
-Keep page components consuming the `Article` type. A future CMS adapter can implement `getAllArticles`, `getArticle`, `getByDesk`, `getFeatured` and `getRelated` without changing public routes. Future jobs, memberships, reports, advertising, directories and multi author support should be introduced only when their data and editorial workflows are defined.
+The Sanity schemas live in `studio/schemaTypes`. Website queries live in `src/sanity`, and the shared article adapter lives in `src/lib/articles.ts`. The six starter articles were imported into the `production` dataset. Three current editorial drafts remain hidden from readers.
+
+Future jobs, memberships, reports, advertising, directories and more authors can be added as separate content types when their workflows are defined.

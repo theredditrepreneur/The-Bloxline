@@ -11,9 +11,9 @@ const deskCopy = {
   Education: "How schools, teachers and learners use and respond to Roblox.",
 };
 
-export default function Home() {
-  const articles = getAllArticles(false);
-  const featured = getFeatured();
+export default async function Home() {
+  const articles = await getAllArticles(false);
+  const featured = await getFeatured();
   const latest = articles.filter((article) => article.slug !== featured?.slug).slice(0, 6);
 
   return (
