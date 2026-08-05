@@ -33,12 +33,14 @@ export default async function Home() {
               <span className="eyebrow">{featured.primaryDesk}</span>
               <h2><Link href={`/articles/${featured.slug}`}>{featured.title}</Link></h2>
               <p className="summary">{featured.excerpt}</p>
-              <div className="meta">
+              <div className="meta featured-meta">
                 <span className="byline">By {featured.author}</span>
+                <span className="meta-divider" aria-hidden="true">•</span>
                 <time dateTime={featured.publishedAt}>
                   {new Date(`${featured.publishedAt}T12:00:00`).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })}
                 </time>
-                <span>{featured.readingTime}</span>
+                <span className="meta-divider" aria-hidden="true">•</span>
+                <span className="reading-time">{featured.readingTime}</span>
               </div>
               <p><Link className="text-link" href={`/articles/${featured.slug}`}>Read article</Link></p>
             </div>

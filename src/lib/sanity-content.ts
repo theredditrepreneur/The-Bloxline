@@ -1,5 +1,5 @@
 import {siteConfig, type SiteSettings} from "@/lib/site"
-import {sanityFetch} from "@/sanity/live"
+import {sanityClient} from "@/sanity/client"
 import {siteSettingsQuery, startHerePageQuery} from "@/sanity/queries"
 
 type SiteSettingsDocument = {
@@ -50,8 +50,7 @@ const defaultStartHere: StartHereContent = {
 
 export async function getSiteSettings(): Promise<SiteSettings> {
   try {
-    const {data} = await sanityFetch({query: siteSettingsQuery, perspective: "published", stega: false})
-    const settings = data as SiteSettingsDocument | null
+    const settings = await sanityClient.withConfig({useCdn: false}).fetch<SiteSettingsDocument | null>(siteSettingsQuery, {}, {next: {revalidate: 60, tags: ["siteSettings"]}})
     if (!settings) return siteConfig
     return {
       ...siteConfig,
@@ -69,15 +68,15 @@ export async function getSiteSettings(): Promise<SiteSettings> {
       },
       defaultSocialImage: settings.socialImage || settings.footerLogo || siteConfig.defaultSocialImage,
     }
-  } catch {
+  } catch (error) {
+    console.error("Unable to load Sanity site settings.", error)
     return siteConfig
   }
 }
 
 export async function getStartHereContent(): Promise<StartHereContent> {
   try {
-    const result = await sanityFetch({query: startHerePageQuery, perspective: "published", stega: false})
-    const data = result.data as StartHereDocument | null
+    const data = await sanityClient.withConfig({useCdn: false}).fetch<StartHereDocument | null>(startHerePageQuery, {}, {next: {revalidate: 60, tags: ["startHerePage"]}})
     if (!data) return defaultStartHere
     return {
       label: data.label || defaultStartHere.label,
@@ -92,7 +91,8 @@ export async function getStartHereContent(): Promise<StartHereContent> {
         href: step.articleSlug ? `/articles/${step.articleSlug}` : step.pagePath || undefined,
       })) : defaultStartHere.steps,
     }
-  } catch {
+  } catch (error) {
+    console.error("Unable to load the Sanity Start Here page.", error)
     return defaultStartHere
   }
 }

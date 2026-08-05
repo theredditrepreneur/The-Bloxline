@@ -5,6 +5,7 @@ type SanityBodyProps = {value: unknown[]}
 
 const components: PortableTextComponents = {
   block: {
+    normal: ({children}) => <p>{children}</p>,
     h2: ({children}) => <h2>{children}</h2>,
     h3: ({children}) => <h3>{children}</h3>,
     blockquote: ({children}) => <blockquote>{children}</blockquote>,
@@ -18,7 +19,7 @@ const components: PortableTextComponents = {
   },
   types: {
     image: ({value}) => value?.asset?.url ? <figure><Image src={value.asset.url} alt={value.alt || ""} width={value.asset.metadata?.dimensions?.width || 1200} height={value.asset.metadata?.dimensions?.height || 800}/>{value.caption && <figcaption>{value.caption}</figcaption>}</figure> : null,
-    editorialCallout: ({value}) => <aside className="callout"><h2>{value?.kind || "Note"}</h2>{Array.isArray(value?.body) && <PortableText value={value.body}/>}</aside>,
+    editorialCallout: ({value}) => <aside className="callout"><h2>{value?.kind || "Note"}</h2>{Array.isArray(value?.body) && <PortableText value={value.body} components={components}/>}</aside>,
   },
 }
 

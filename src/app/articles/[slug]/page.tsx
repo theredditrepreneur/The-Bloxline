@@ -1,4 +1,71 @@
-import type {Metadata} from "next"; import Link from "next/link"; import {notFound} from "next/navigation"; import {MDXRemote} from "next-mdx-remote/rsc"; import {ArticleCard, ArticleCover} from "@/components/ArticleCard"; import {Newsletter} from "@/components/Newsletter"; import {SanityBody} from "@/components/SanityBody"; import * as Callouts from "@/components/Callouts"; import {getAllArticles, getArticle, getRelated} from "@/lib/articles"; import {absoluteUrl, siteConfig} from "@/lib/site";
-export const dynamicParams=true; export async function generateStaticParams(){return (await getAllArticles(false)).map((article)=>({slug:article.slug}))}
-export async function generateMetadata({params}:{params:Promise<{slug:string}>}):Promise<Metadata>{const {slug}=await params,a=await getArticle(slug);if(!a)return{};return{title:a.seoTitle||a.title,description:a.seoDescription,alternates:{canonical:a.canonicalUrl||`/articles/${a.slug}`},openGraph:{type:"article",title:a.title,description:a.seoDescription,publishedTime:a.publishedAt,modifiedTime:a.updatedAt,authors:[a.author],section:a.primaryDesk,images:[{url:a.coverImage,alt:a.coverAlt}]},twitter:{card:"summary_large_image",title:a.title,description:a.seoDescription,images:[a.coverImage]}}}
-export default async function Page({params}:{params:Promise<{slug:string}>}){const {slug}=await params,a=await getArticle(slug);if(!a)notFound();const related=await getRelated(a);const articleJson={"@context":"https://schema.org","@type":"NewsArticle",headline:a.title,description:a.seoDescription,datePublished:a.publishedAt,dateModified:a.updatedAt||a.publishedAt,mainEntityOfPage:absoluteUrl(`/articles/${a.slug}`),author:{"@type":"Person",name:a.author},publisher:{"@type":"NewsMediaOrganization",name:siteConfig.name,logo:{"@type":"ImageObject",url:absoluteUrl(siteConfig.logos.compact)}},image:a.coverImage.startsWith("http")?a.coverImage:absoluteUrl(a.coverImage)};const crumbs={"@context":"https://schema.org","@type":"BreadcrumbList",itemListElement:[{"@type":"ListItem",position:1,name:"Home",item:siteConfig.url},{"@type":"ListItem",position:2,name:a.primaryDesk,item:absoluteUrl(`/${a.primaryDesk.toLowerCase()}`)},{"@type":"ListItem",position:3,name:a.title,item:absoluteUrl(`/articles/${a.slug}`)}]};return <><article><header className="article-header"><span className="eyebrow"><Link href={`/${a.primaryDesk.toLowerCase()}`}>{a.primaryDesk}</Link></span><h1>{a.title}</h1>{a.subtitle&&<p className="subtitle">{a.subtitle}</p>}<div className="meta"><span className="byline">By {a.author}</span><time dateTime={a.publishedAt}>Published {new Date(a.publishedAt+"T12:00:00").toLocaleDateString("en-GB",{day:"numeric",month:"long",year:"numeric"})}</time>{a.updatedAt&&<time dateTime={a.updatedAt}>Updated {new Date(a.updatedAt+"T12:00:00").toLocaleDateString("en-GB",{day:"numeric",month:"long",year:"numeric"})}</time>}<span>{a.readingTime}</span></div></header><div className="article-hero"><ArticleCover article={a} large/></div><div className="article-layout"><div className="prose">{a.contentFormat==="sanity"?<SanityBody value={a.body as unknown[]}/>:<MDXRemote source={a.body as string} components={Callouts}/>} {a.sourceLinks.length>0&&<section className="source-list"><h2>Sources and Further Reading</h2><ul>{a.sourceLinks.map(s=><li key={s.url}><a href={s.url} rel="noopener noreferrer">{s.title}</a></li>)}</ul></section>}{a.disclosure&&<section className="callout"><h2>Disclosure</h2><p>{a.disclosure}</p></section>}</div><aside className="article-aside"><div><strong>Published</strong><time dateTime={a.publishedAt}>{a.publishedAt}</time><strong style={{marginTop:14}}>Desk</strong><Link className="text-link" href={`/${a.primaryDesk.toLowerCase()}`}>{a.primaryDesk}</Link></div></aside></div></article>{related.length>0&&<section className="section container"><div className="section-heading"><h2>Related stories</h2><Link className="text-link" href={`/${a.primaryDesk.toLowerCase()}`}>Explore {a.primaryDesk}</Link></div><div className="article-grid">{related.map(r=><ArticleCard key={r.slug} article={r}/>)}</div></section>}<section className="container" style={{paddingBottom:64}}><Newsletter compact/></section><script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(articleJson).replace(/</g,"\\u003c")}}/><script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(crumbs).replace(/</g,"\\u003c")}}/></>}
+import type {Metadata} from "next"
+import Link from "next/link"
+import {notFound} from "next/navigation"
+import {MDXRemote} from "next-mdx-remote/rsc"
+import {ArticleCard, ArticleCover} from "@/components/ArticleCard"
+import {Newsletter} from "@/components/Newsletter"
+import {SanityBody} from "@/components/SanityBody"
+import * as Callouts from "@/components/Callouts"
+import {getAllArticles, getArticle, getRelated} from "@/lib/articles"
+import {absoluteUrl, siteConfig} from "@/lib/site"
+
+export const dynamicParams = true
+
+export async function generateStaticParams() {
+  return (await getAllArticles(false)).map((article) => ({slug: article.slug}))
+}
+
+export async function generateMetadata({params}: {params: Promise<{slug: string}>}): Promise<Metadata> {
+  const {slug} = await params
+  const article = await getArticle(slug)
+  if (!article) return {}
+  return {
+    title: article.seoTitle || article.title,
+    description: article.seoDescription,
+    alternates: {canonical: article.canonicalUrl || `/articles/${article.slug}`},
+    openGraph: {type: "article", title: article.title, description: article.seoDescription, publishedTime: article.publishedAt, modifiedTime: article.updatedAt, authors: [article.author], section: article.primaryDesk, images: [{url: article.coverImage, alt: article.coverAlt}]},
+    twitter: {card: "summary_large_image", title: article.title, description: article.seoDescription, images: [article.coverImage]},
+  }
+}
+
+const formatDate = (date: string) => new Date(`${date}T12:00:00`).toLocaleDateString("en-GB", {day: "numeric", month: "long", year: "numeric"})
+
+export default async function Page({params}: {params: Promise<{slug: string}>}) {
+  const {slug} = await params
+  const article = await getArticle(slug)
+  if (!article) notFound()
+  const related = await getRelated(article)
+  const articleJson = {"@context": "https://schema.org", "@type": "NewsArticle", headline: article.title, description: article.seoDescription, datePublished: article.publishedAt, dateModified: article.updatedAt || article.publishedAt, mainEntityOfPage: absoluteUrl(`/articles/${article.slug}`), author: {"@type": "Person", name: article.author}, publisher: {"@type": "NewsMediaOrganization", name: siteConfig.name, logo: {"@type": "ImageObject", url: absoluteUrl(siteConfig.logos.compact)}}, image: article.coverImage.startsWith("http") ? article.coverImage : absoluteUrl(article.coverImage)}
+  const crumbs = {"@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [{"@type": "ListItem", position: 1, name: "Home", item: siteConfig.url}, {"@type": "ListItem", position: 2, name: article.primaryDesk, item: absoluteUrl(`/${article.primaryDesk.toLowerCase()}`)}, {"@type": "ListItem", position: 3, name: article.title, item: absoluteUrl(`/articles/${article.slug}`)}]}
+
+  return <>
+    <article>
+      <header className="article-header">
+        <span className="eyebrow"><Link href={`/${article.primaryDesk.toLowerCase()}`}>{article.primaryDesk}</Link></span>
+        <h1>{article.title}</h1>
+        {article.subtitle && <p className="subtitle">{article.subtitle}</p>}
+        <div className="meta article-meta">
+          <span className="byline">By {article.author}</span>
+          <span className="meta-divider" aria-hidden="true">•</span>
+          <time dateTime={article.publishedAt}>Published {formatDate(article.publishedAt)}</time>
+          {article.updatedAt && <><span className="meta-divider" aria-hidden="true">•</span><time dateTime={article.updatedAt}>Updated {formatDate(article.updatedAt)}</time></>}
+          <span className="meta-divider" aria-hidden="true">•</span>
+          <span className="reading-time">{article.readingTime}</span>
+        </div>
+      </header>
+      <div className="article-hero"><ArticleCover article={article} large/></div>
+      <div className="article-layout">
+        <div className="prose">
+          {article.contentFormat === "sanity" ? <SanityBody value={article.body as unknown[]}/> : <MDXRemote source={article.body as string} components={Callouts}/>}
+          {article.sourceLinks.length > 0 && <section className="source-list"><h2>Sources and Further Reading</h2><ul>{article.sourceLinks.map((source) => <li key={source.url}><a href={source.url} rel="noopener noreferrer">{source.title}</a></li>)}</ul></section>}
+          {article.disclosure && <section className="callout"><h2>Disclosure</h2><p>{article.disclosure}</p></section>}
+        </div>
+        <aside className="article-aside"><div><strong>Published</strong><time dateTime={article.publishedAt}>{article.publishedAt}</time><strong style={{marginTop: 14}}>Desk</strong><Link className="text-link" href={`/${article.primaryDesk.toLowerCase()}`}>{article.primaryDesk}</Link></div></aside>
+      </div>
+    </article>
+    {related.length > 0 && <section className="section container"><div className="section-heading"><h2>Related stories</h2><Link className="text-link" href={`/${article.primaryDesk.toLowerCase()}`}>Explore {article.primaryDesk}</Link></div><div className="article-grid">{related.map((story) => <ArticleCard key={story.slug} article={story}/>)}</div></section>}
+    <section className="container" style={{paddingBottom: 64}}><Newsletter compact/></section>
+    <script type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify(articleJson).replace(/</g, "\\u003c")}}/>
+    <script type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify(crumbs).replace(/</g, "\\u003c")}}/>
+  </>
+}
