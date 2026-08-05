@@ -1,0 +1,34 @@
+.topbar > a {
+  width: 190px;
+  height: 52px;
+  display: block;
+  overflow: hidden;
+  position: relative;
+  flex: 0 0 190px;
+}
+
+.topbar > a img {
+  position: absolute;
+  width: 215px;
+  max-width: none;
+  height: 215px;
+  top: -77px;
+  left: -9px;
+  object-fit: contain;
+}
+
+@media (max-width: 600px) {
+  .topbar > a {
+    width: 145px;
+    height: 48px;
+    flex-basis: 145px;
+  }
+
+  .topbar > a img {
+    width: 165px;
+    max-width: none;
+    height: 165px;
+    top: -59px;
+    left: -7px;
+  }
+}
