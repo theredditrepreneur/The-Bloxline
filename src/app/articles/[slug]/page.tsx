@@ -8,6 +8,7 @@ import {SanityBody} from "@/components/SanityBody"
 import {ShareArticle} from "@/components/ShareArticle"
 import * as Callouts from "@/components/Callouts"
 import {getAllArticles, getArticle, getRelated} from "@/lib/articles"
+import {formatArticleDate} from "@/lib/article-date"
 import {absoluteUrl, siteConfig} from "@/lib/site"
 
 export const dynamicParams = true
@@ -29,7 +30,7 @@ export async function generateMetadata({params}: {params: Promise<{slug: string}
   }
 }
 
-const formatDate = (date: string) => new Date(`${date}T12:00:00`).toLocaleDateString("en-GB", {day: "numeric", month: "long", year: "numeric"})
+const formatDate = formatArticleDate
 
 export default async function Page({params}: {params: Promise<{slug: string}>}) {
   const {slug} = await params
@@ -61,7 +62,7 @@ export default async function Page({params}: {params: Promise<{slug: string}>}) 
           {article.sourceLinks.length > 0 && <section className="source-list"><h2>Sources and Further Reading</h2><ul>{article.sourceLinks.map((source) => <li key={source.url}><a href={source.url} rel="noopener noreferrer">{source.title}</a></li>)}</ul></section>}
           {article.disclosure && <section className="callout"><h2>Disclosure</h2><p>{article.disclosure}</p></section>}
         </div>
-        <aside className="article-aside"><div><strong>Published</strong><time dateTime={article.publishedAt}>{article.publishedAt}</time><strong style={{marginTop: 14}}>Desk</strong><Link className="text-link" href={`/${article.primaryDesk.toLowerCase()}`}>{article.primaryDesk}</Link></div></aside>
+        <aside className="article-aside"><div><strong>Published</strong><time dateTime={article.publishedAt}>{formatDate(article.publishedAt)}</time><strong style={{marginTop: 14}}>Desk</strong><Link className="text-link" href={`/${article.primaryDesk.toLowerCase()}`}>{article.primaryDesk}</Link></div></aside>
       </div>
       <div className="article-share"><ShareArticle title={article.title} url={absoluteUrl(`/articles/${article.slug}`)}/></div>
     </article>

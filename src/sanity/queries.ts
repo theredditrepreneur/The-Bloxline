@@ -6,7 +6,7 @@ const articleFields = /* groq */ `
   "slug": slug.current,
   subtitle,
   excerpt,
-  publishedAt,
+  "publishedAt": coalesce(publishedAtTime, publishedAt + "T12:00:00Z"),
   updatedAt,
   "author": coalesce(author->name, "Tonte Bo Douglas"),
   primaryDesk,
@@ -36,12 +36,16 @@ const articleFields = /* groq */ `
 
 export const allArticlesQuery = defineQuery(/* groq */ `
   *[_type == "article" && defined(slug.current) && draft != true]
-  | order(publishedAt desc, _id asc){${articleFields}}
+  | order(coalesce(publishedAtTime, publishedAt) desc, _createdAt desc){${articleFields}}
 `)
 
 export const allArticlesIncludingEditorialDraftsQuery = defineQuery(/* groq */ `
   *[_type == "article" && defined(slug.current)]
-  | order(publishedAt desc, _id asc){${articleFields}}
+  | order(coalesce(publishedAtTime, publishedAt) desc, _createdAt desc){${articleFields}}
+`)
+
+export const featuredArticleQuery = defineQuery(/* groq */ `
+  *[_id == "siteSettings"][0].featuredArticle->{${articleFields}}
 `)
 
 export const articleBySlugQuery = defineQuery(/* groq */ `

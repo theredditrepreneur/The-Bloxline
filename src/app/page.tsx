@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArticleCard, ArticleCover } from "@/components/ArticleCard";
 import { Newsletter } from "@/components/Newsletter";
 import { getAllArticles, getFeatured } from "@/lib/articles";
+import { formatArticleDate } from "@/lib/article-date";
 
 const deskCopy = {
   Parents: "Clear guidance for adults raising children who use Roblox.",
@@ -37,7 +38,7 @@ export default async function Home() {
                 <span className="byline">By {featured.author}</span>
                 <span className="meta-divider" aria-hidden="true">•</span>
                 <time dateTime={featured.publishedAt}>
-                  {new Date(`${featured.publishedAt}T12:00:00`).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })}
+                  {formatArticleDate(featured.publishedAt)}
                 </time>
                 <span className="meta-divider" aria-hidden="true">•</span>
                 <span className="reading-time">{featured.readingTime}</span>

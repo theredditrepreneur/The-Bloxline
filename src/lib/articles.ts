@@ -5,14 +5,14 @@ import readingTime from "reading-time"
 import {toPlainText, type PortableTextBlock} from "@portabletext/react"
 import {z} from "zod"
 import {sanityFetch} from "@/sanity/live"
-import {allArticlesIncludingEditorialDraftsQuery, allArticlesQuery} from "@/sanity/queries"
+import {allArticlesIncludingEditorialDraftsQuery, allArticlesQuery, featuredArticleQuery} from "@/sanity/queries"
 
 export const desks = ["Parents", "Industry", "Games", "Studios", "Education"] as const
 export type Desk = (typeof desks)[number]
 
 const articleSchema = z.object({
   title: z.string().min(10), slug: z.string().regex(/^[a-z0-9-]+$/), subtitle: z.string().optional(), excerpt: z.string().min(30),
-  publishedAt: z.string().date(), updatedAt: z.string().date().optional(), author: z.string().min(2), primaryDesk: z.enum(desks),
+  publishedAt: z.string().refine((value) => !Number.isNaN(Date.parse(value)), "Use a valid publication date and time"), updatedAt: z.string().date().optional(), author: z.string().min(2), primaryDesk: z.enum(desks),
   secondaryTopics: z.array(z.string()).default([]), coverImage: z.string().optional(), coverAlt: z.string().optional(), featured: z.boolean().default(false),
   draft: z.boolean().default(true), readingTime: z.string().optional(), seoTitle: z.string().optional(), seoDescription: z.string().min(30),
   canonicalUrl: z.string().url().optional(), sourceLinks: z.array(z.object({title: z.string(), url: z.string().url()})).default([]),
@@ -32,7 +32,7 @@ function getLocalArticles(includeDrafts: boolean): Article[] {
     if (!parsed.success) throw new Error(`Invalid article frontmatter in ${file}: ${parsed.error.issues.map((issue) => `${issue.path.join(".")}: ${issue.message}`).join("; ")}`)
     if (parsed.data.slug !== file.replace(/\.mdx$/, "")) throw new Error(`Slug mismatch in ${file}`)
     return {...parsed.data, readingTime: parsed.data.readingTime || readingTime(content).text.replace("min read", "minute read"), body: content, contentFormat: "mdx" as const}
-  }).filter((article) => includeDrafts || !article.draft).sort((a, b) => b.publishedAt.localeCompare(a.publishedAt))
+  }).filter((article) => includeDrafts || !article.draft).sort((a, b) => Date.parse(b.publishedAt) - Date.parse(a.publishedAt))
 }
 
 function mapSanityArticle(document: Record<string, unknown>): Article | null {
@@ -69,7 +69,7 @@ export async function getAllArticles(includeDrafts = process.env.NODE_ENV !== "p
     const result = await sanityFetch({query: includeDrafts ? allArticlesIncludingEditorialDraftsQuery : allArticlesQuery, perspective: "published", stega: false})
     const documents = result.data as Record<string, unknown>[]
     const articles = documents.map(mapSanityArticle).filter((article): article is Article => article !== null)
-    return articles.length ? articles : getLocalArticles(includeDrafts)
+    return articles.length ? articles.sort((a, b) => Date.parse(b.publishedAt) - Date.parse(a.publishedAt)) : getLocalArticles(includeDrafts)
   } catch (error) {
     console.error("Sanity is unavailable. Using local article files.", error)
     return getLocalArticles(includeDrafts)
@@ -78,7 +78,18 @@ export async function getAllArticles(includeDrafts = process.env.NODE_ENV !== "p
 
 export async function getArticle(slug: string) { return (await getAllArticles()).find((article) => article.slug === slug) }
 export async function getByDesk(desk: Desk) { return (await getAllArticles()).filter((article) => article.primaryDesk === desk) }
-export async function getFeatured() { const articles = await getAllArticles(false); return articles.find((article) => article.featured) || articles[0] }
+export async function getFeatured() {
+  const articles = await getAllArticles(false)
+  try {
+    const result = await sanityFetch({query: featuredArticleQuery, perspective: "published", stega: false})
+    const document = result.data as Record<string, unknown> | null
+    const selected = document ? mapSanityArticle(document) : null
+    if (selected && !selected.draft) return selected
+  } catch (error) {
+    console.error("Unable to load the selected homepage article.", error)
+  }
+  return articles.find((article) => article.featured) || articles[0]
+}
 export async function getRelated(article: Article) { return (await getAllArticles(false)).filter((candidate) => candidate.slug !== article.slug && (candidate.primaryDesk === article.primaryDesk || candidate.secondaryTopics.some((topic) => article.secondaryTopics.includes(topic)))).slice(0, 3) }
 
 export async function getSearchIndex() {

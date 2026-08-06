@@ -17,6 +17,7 @@ export const siteSettingsType = defineType({
   icon: CogIcon,
   groups: [
     {name: "identity", title: "Identity", default: true},
+    {name: "homepage", title: "Homepage"},
     {name: "images", title: "Logos and images"},
     {name: "contact", title: "Contact and legal"},
     {name: "social", title: "Social profiles"},
@@ -27,6 +28,7 @@ export const siteSettingsType = defineType({
     defineField({name: "description", title: "Search and publication description", type: "text", rows: 3, group: "identity", validation: (rule) => rule.required().min(30)}),
     defineField({name: "footerDescription", title: "Footer description", type: "text", rows: 3, group: "identity", validation: (rule) => rule.required()}),
     defineField({name: "founder", title: "Founder", type: "string", group: "identity"}),
+    defineField({name: "featuredArticle", title: "Featured homepage article", type: "reference", to: [{type: "article"}], group: "homepage", description: "Choose the main story shown at the top of the homepage. You can change it at any time.", options: {filter: "draft != true"}}),
     brandedImage("headerLogo", "Header logo", "The compact logo shown at the top of the website."),
     brandedImage("footerLogo", "Footer banner", "The wide banner shown in the footer."),
     brandedImage("favicon", "Favicon", "The small B icon shown in browser tabs. A square image works best."),

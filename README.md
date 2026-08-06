@@ -35,14 +35,16 @@ The editor has four main areas:
 - **Authors** contains reusable author details.
 
 1. Open **Article** and choose an existing article, or choose **Create** to add one.
-2. Complete the headline, article address, summary, body, author, date and desk.
+2. Complete the headline, article address, summary, body, author, publication date and time, and desk. The exact time controls the order when several stories are published on the same day.
 3. Upload a cover image that The Bloxline has permission to use and add useful alternative text.
 4. Keep **Keep off the public website** switched on while the article is being prepared.
 5. Complete the search title and search description.
 6. Publish the document in Sanity.
 7. When it is ready for readers, switch **Keep off the public website** off and publish once more. Saved drafts are not shown on the public website until **Publish** is pressed.
 
-The website uses Sanity live content updates. Published changes automatically clear the relevant website cache. New articles keep the route `/articles/article-address`, so changing the domain does not change article links.
+The website uses Sanity live content updates. A signed Sanity webhook also clears the relevant website pages as soon as a document is published. New articles keep the route `/articles/article-address`, so changing the domain does not change article links.
+
+Choose the homepage lead story under **Site details → Homepage → Featured homepage article**. This is the single manual featured selection. If no article is selected, the website first checks the previous feature switch and then uses the newest article.
 
 ## Run Sanity Studio locally
 
@@ -63,7 +65,7 @@ Run `npm run build` inside `studio` before deploying editor changes. Run `npm ru
 6. Run `npm run build`. Invalid or incomplete frontmatter stops the build with the affected filename.
 7. Preview locally, change to `draft: false`, commit and deploy.
 
-Set `featured: true` to place a published article in the homepage lead slot. Keep only one current featured story. Articles sort by `publishedAt`.
+Local MDX fallback articles can use `featured: true` for the homepage lead slot. Articles sort by their full `publishedAt` value, including the time when one is provided.
 
 Supported frontmatter includes title, slug, subtitle, excerpt, dates, author, desk, topics, cover information, featured and draft states, SEO fields, canonical URL, source links, disclosure and audience relevance notes. Reading time is generated when it is omitted.
 
@@ -124,7 +126,7 @@ No analytics run by default. Vercel Analytics can later be added with its offici
 3. Accept the detected Next.js settings.
 4. Set `NEXT_PUBLIC_SITE_URL` to `https://www.thebloxline.com`.
 5. Set `NEXT_PUBLIC_SANITY_PROJECT_ID` to `ce0b69vh` and `NEXT_PUBLIC_SANITY_DATASET` to `production`. The project ID also has a code fallback, but setting it in Vercel keeps the connection explicit.
-6. Optionally add `NEXT_PUBLIC_CONTACT_EMAIL` and `NEWSLETTER_WEBHOOK_URL`.
+6. Add `SANITY_REVALIDATE_SECRET` using the same private value configured on the Sanity webhook. Optionally add `NEXT_PUBLIC_CONTACT_EMAIL` and `NEWSLETTER_WEBHOOK_URL`.
 7. Deploy, then check `/robots.txt`, `/sitemap.xml`, `/rss.xml`, a published article and a search query.
 
 ## Connect thebloxline.com later
@@ -137,6 +139,19 @@ No analytics run by default. Vercel Analytics can later be added with its offici
 6. Confirm article canonical tags use the new domain. Article paths remain `/articles/[slug]`.
 7. Open `/sitemap.xml` and confirm URLs use the new domain, then submit it to relevant webmaster tools.
 8. Test the homepage and article Open Graph previews using current social preview tools.
+
+## Instant Sanity publishing
+
+Create a Sanity GROQ webhook with these settings:
+
+- URL: `https://www.thebloxline.com/api/revalidate`
+- Dataset: `production`
+- Trigger on: create, update and delete
+- Filter: `_type in ["article", "siteSettings", "author"]`
+- Projection: `{_type, "slug": slug.current}`
+- Secret: the same private value stored as `SANITY_REVALIDATE_SECRET` in Vercel
+
+Enable drafts only if draft changes should refresh public pages. The endpoint verifies Sanity's signature and rejects unsigned requests.
 
 ## How the content connection works
 
