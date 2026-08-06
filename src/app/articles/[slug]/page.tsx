@@ -53,7 +53,6 @@ export default async function Page({params}: {params: Promise<{slug: string}>}) 
           <span className="meta-divider" aria-hidden="true">•</span>
           <span className="reading-time">{article.readingTime}</span>
         </div>
-        <ShareArticle title={article.title} url={absoluteUrl(`/articles/${article.slug}`)}/>
       </header>
       <div className="article-hero"><ArticleCover article={article} large/></div>
       <div className="article-layout">
@@ -64,6 +63,7 @@ export default async function Page({params}: {params: Promise<{slug: string}>}) 
         </div>
         <aside className="article-aside"><div><strong>Published</strong><time dateTime={article.publishedAt}>{article.publishedAt}</time><strong style={{marginTop: 14}}>Desk</strong><Link className="text-link" href={`/${article.primaryDesk.toLowerCase()}`}>{article.primaryDesk}</Link></div></aside>
       </div>
+      <div className="article-share"><ShareArticle title={article.title} url={absoluteUrl(`/articles/${article.slug}`)}/></div>
     </article>
     {related.length > 0 && <section className="section container"><div className="section-heading"><h2>Related stories</h2><Link className="text-link" href={`/${article.primaryDesk.toLowerCase()}`}>Explore {article.primaryDesk}</Link></div><div className="article-grid">{related.map((story) => <ArticleCard key={story.slug} article={story}/>)}</div></section>}
     <section className="container" style={{paddingBottom: 64}}><Newsletter compact/></section>

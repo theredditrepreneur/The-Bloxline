@@ -11,10 +11,9 @@ export function Footer({settings}: {settings: SiteSettings}) {
       <div><h2>Desks</h2>{["Parents", "Industry", "Games", "Studios", "Education"].map((desk) => <Link key={desk} href={`/${desk.toLowerCase()}`}>{desk}</Link>)}</div>
       <div>
         <h2>Information</h2><Link href="/privacy">Privacy</Link><Link href="/terms">Terms</Link><Link href="/rss.xml">RSS</Link>
-        <h2 className="follow-heading">Follow</h2>
-        <div className="footer-socials">{Object.entries(settings.social).map(([name, href]) => href && <a key={name} href={href} target="_blank" rel="noopener noreferrer" aria-label={name} title={name}><SocialIcon name={name}/></a>)}</div>
       </div>
     </div>
+    <div className="footer-follow"><h2>Follow</h2><div className="footer-socials">{Object.entries(settings.social).map(([name, href]) => href && <a key={name} href={href} target="_blank" rel="noopener noreferrer" aria-label={name} title={name}><SocialIcon name={name}/></a>)}</div></div>
     <div className="footer-bottom"><p>{settings.disclaimer}</p><p>© {new Date().getFullYear()} {settings.name}.</p></div>
   </footer>
 }

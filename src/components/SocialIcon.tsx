@@ -9,6 +9,7 @@ export function SocialIcon({name}: IconProps) {
     case "TikTok": return <svg {...common}><path d="M15 4v10.2a4.2 4.2 0 1 1-3.2-4.1"/><path d="M15 4c.8 2.3 2.2 3.6 4.5 4"/></svg>
     case "Facebook": return <svg {...common}><path d="M14 21v-8h3l.5-3H14V8.3c0-.9.3-1.8 1.9-1.8H18V3.8c-.6-.1-1.7-.3-3-.3-3 0-5 1.8-5 5.1V10H7v3h3v8"/></svg>
     case "LinkedIn": return <svg {...common}><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7.5 10v7M7.5 7v.1M11 17v-7M11 13a3 3 0 0 1 6 0v4"/></svg>
+    case "X": return <svg {...common}><path d="M5 4 19 20M19 4 5 20"/></svg>
     case "Email": return <svg {...common}><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg>
     case "Copy": return <svg {...common}><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>
     default: return null
