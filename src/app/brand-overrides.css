@@ -34,7 +34,14 @@
 }
 
 /* Keep page and article copy comfortably away from every screen edge. */
+.section {
+  padding-top: clamp(42px, 4vw, 56px);
+  padding-bottom: clamp(42px, 4vw, 56px);
+}
+
 .page-head {
+  padding-top: clamp(44px, 5vw, 60px);
+  padding-bottom: clamp(44px, 5vw, 60px);
   padding-left: clamp(32px, 5vw, 96px);
   padding-right: clamp(32px, 5vw, 96px);
 }
@@ -76,7 +83,7 @@
 .article-hero {
   width: 100%;
   max-width: 980px;
-  margin-bottom: 52px;
+  margin-bottom: clamp(38px, 4vw, 48px);
 }
 
 .homepage-lead {
@@ -278,7 +285,7 @@
 }
 
 .about-hero {
-  padding: clamp(64px, 8vw, 112px) clamp(28px, 5vw, 72px);
+  padding: clamp(52px, 6vw, 76px) clamp(28px, 5vw, 72px);
   border-bottom: 1px solid var(--line);
   background: var(--wash);
 }
@@ -306,7 +313,7 @@
 .about-page {
   max-width: var(--max);
   margin: 0 auto;
-  padding: 0 clamp(28px, 5vw, 72px) clamp(72px, 8vw, 112px);
+  padding: 0 clamp(28px, 5vw, 72px) clamp(56px, 6vw, 76px);
 }
 
 .about-founder-intro {
@@ -314,7 +321,7 @@
   grid-template-columns: 280px minmax(0, 720px);
   gap: clamp(46px, 7vw, 92px);
   align-items: start;
-  padding: clamp(72px, 9vw, 120px) 0;
+  padding: clamp(56px, 6vw, 76px) 0 clamp(42px, 5vw, 58px);
 }
 
 .about-portrait {
@@ -359,7 +366,7 @@
 
 .about-section {
   max-width: 880px;
-  padding: clamp(72px, 9vw, 112px) 0;
+  padding: clamp(48px, 5vw, 64px) 0;
   border-top: 1px solid var(--line);
 }
 
@@ -462,7 +469,7 @@
 
 .about-founder-card {
   max-width: 760px;
-  margin-top: clamp(72px, 9vw, 112px);
+  margin-top: clamp(48px, 5vw, 64px);
   padding: 30px;
   border: 1px solid var(--line);
   display: flex;
@@ -567,7 +574,7 @@
   }
 
   .about-hero {
-    padding: 56px 24px;
+    padding: 48px 24px;
   }
 
   .about-hero h1 {
@@ -582,7 +589,7 @@
   .about-founder-intro {
     grid-template-columns: 1fr;
     gap: 38px;
-    padding: 64px 0 72px;
+    padding: 48px 0 40px;
   }
 
   .about-portrait {
@@ -596,7 +603,7 @@
   }
 
   .about-section {
-    padding: 68px 0;
+    padding: 44px 0;
   }
 
   .about-pillar-grid,
