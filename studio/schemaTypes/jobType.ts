@@ -18,7 +18,7 @@ export const jobType = defineType({
     defineField({name: "title", title: "Job title", type: "string", group: "role", validation: (rule) => rule.required()}),
     defineField({name: "slug", title: "Job page address", type: "slug", group: "role", options: {source: (document) => `${document.title || "job"}-at-${document.company || "company"}`, maxLength: 96}, validation: (rule) => rule.required()}),
     defineField({name: "company", title: "Company", type: "string", group: "role", validation: (rule) => rule.required()}),
-    defineField({name: "companySlug", title: "Company address name", type: "slug", group: "role", options: {source: "company"}, validation: (rule) => rule.required()}),
+    defineField({name: "companySlug", title: "Company address name", type: "slug", group: "role", description: "The same company address name can be used for every vacancy from that company.", options: {source: "company", isUnique: () => true}, validation: (rule) => rule.required()}),
     defineField({name: "companyDescription", title: "Company summary", type: "text", rows: 2, group: "role"}),
     defineField({name: "companyUrl", title: "Company website", type: "url", group: "role", validation: (rule) => rule.uri({scheme: ["http", "https"]})}),
     defineField({name: "location", title: "Location", type: "string", group: "role", validation: (rule) => rule.required()}),
