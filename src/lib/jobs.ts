@@ -12,7 +12,7 @@ export async function getAllJobs(): Promise<Job[]> {
   try {
     const documents = await sanityClient.withConfig({useCdn: false}).fetch<unknown[]>(allJobsQuery, {}, {next: {revalidate: 60, tags: ["jobs"]}})
     const sanityJobs = documents.filter(validJob)
-    return sanityJobs.length ? sanityJobs : localJobs
+    return sanityJobs
   } catch (error) {
     console.error("Unable to load Sanity jobs. Using the local jobs file.", error)
     return localJobs
