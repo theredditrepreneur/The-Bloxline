@@ -147,7 +147,7 @@ Create a Sanity GROQ webhook with these settings:
 - URL: `https://www.thebloxline.com/api/revalidate`
 - Dataset: `production`
 - Trigger on: create, update and delete
-- Filter: `_type in ["article", "job", "siteSettings", "author"]`
+- Filter: `_type in ["article", "job", "jobsPageSettings", "siteSettings", "author"]`
 - Projection: `{_type, "slug": slug.current}`
 - Secret: the same private value stored as `SANITY_REVALIDATE_SECRET` in Vercel
 
@@ -177,5 +177,7 @@ To add a job:
 10. Check every listing regularly.
 
 To expire a job, open it in Sanity, change **Public status** to **Expired**, then publish. A known closing date in the past also removes it from the current list automatically. Expired jobs remain in Sanity for editorial records but are left out of the Jobs landing page, sitemap and JobPosting data.
+
+To edit the career guide cards on the Jobs page, open **Jobs page settings** in Sanity. You can change the section heading, add or remove cards, drag them into a new order and choose whether each card links to a published article or displays a Coming soon label.
 
 The data model already includes optional salary information, featured status and `studioProfileSlug`. A future Studio profile can call `getJobsByStudioProfileSlug` to show its current roles. Employer accounts, payments and candidate features are intentionally not part of this version.

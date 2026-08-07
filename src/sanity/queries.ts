@@ -124,3 +124,19 @@ export const allJobsQuery = defineQuery(/* groq */ `
     remoteEligibility
   }
 `)
+
+export const jobsPageSettingsQuery = defineQuery(/* groq */ `
+  *[_id == "jobsPageSettings"][0]{
+    careerGuidesHeading,
+    careerGuides[]{
+      _key,
+      status,
+      title,
+      description,
+      label,
+      "articleTitle": article->title,
+      "articleExcerpt": article->excerpt,
+      "articleSlug": article->slug.current
+    }
+  }
+`)

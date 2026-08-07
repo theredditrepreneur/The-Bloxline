@@ -18,6 +18,6 @@ export default defineConfig({
   plugins: [structureTool({structure}), visionTool({defaultApiVersion: "2026-08-05"})],
   schema: {types: schemaTypes},
   document: {
-    newDocumentOptions: (previous) => previous.filter((item) => !["siteSettings", "startHerePage"].includes(item.templateId)),
+    newDocumentOptions: (previous) => previous.filter((item) => !["siteSettings", "startHerePage", "jobsPageSettings"].includes(item.templateId)),
   },
 })
