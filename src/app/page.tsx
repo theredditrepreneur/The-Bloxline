@@ -3,7 +3,7 @@ import { ArticleCard, ArticleCover } from "@/components/ArticleCard";
 import { Newsletter } from "@/components/Newsletter";
 import { getAllArticles, getFeatured } from "@/lib/articles";
 import { formatArticleDate } from "@/lib/article-date";
-import { getPublicJobs } from "../../content/jobs/jobs";
+import { getPublicJobs } from "@/lib/jobs";
 
 const deskCopy = {
   Parents: "Clear guidance for adults raising children who use Roblox.",
@@ -18,7 +18,7 @@ export default async function Home() {
   const articles = await getAllArticles(false);
   const featured = await getFeatured();
   const latest = articles.filter((article) => article.slug !== featured?.slug).slice(0, 6);
-  const latestJobs = getPublicJobs().slice(0, 3);
+  const latestJobs = (await getPublicJobs()).slice(0, 3);
 
   return (
     <>

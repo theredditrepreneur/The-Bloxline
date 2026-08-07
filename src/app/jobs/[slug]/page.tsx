@@ -1,21 +1,22 @@
 import type {Metadata} from "next"
 import Link from "next/link"
 import {notFound} from "next/navigation"
-import {effectiveJobStatus, getJob, getPublicJobs, jobs} from "../../../../content/jobs/jobs"
+import {effectiveJobStatus} from "../../../../content/jobs/jobs"
+import {getAllJobs, getJob, getPublicJobs} from "@/lib/jobs"
 import {absoluteUrl} from "@/lib/site"
 
 const statusLabels = {active: "Active", "closing-soon": "Closing soon", expired: "Expired", unknown: "Check availability"}
-export function generateStaticParams() { return jobs.map(({slug}) => ({slug})) }
+export async function generateStaticParams() { return (await getAllJobs()).map(({slug}) => ({slug})) }
 type JobPageProps = {params: Promise<{slug: string}>}
 export async function generateMetadata({params}: JobPageProps): Promise<Metadata> {
-  const {slug} = await params; const job = getJob(slug); if (!job) return {}
+  const {slug} = await params; const job = await getJob(slug); if (!job) return {}
   return {title: `${job.title} at ${job.company} | The Bloxline Jobs`, description: job.description, alternates: {canonical: `/jobs/${job.slug}`}, openGraph: {title: `${job.title} at ${job.company}`, description: job.description, url: `/jobs/${job.slug}`, type: "article"}}
 }
 
 export default async function JobPage({params}: JobPageProps) {
-  const {slug} = await params; const job = getJob(slug); if (!job) notFound()
+  const {slug} = await params; const job = await getJob(slug); if (!job) notFound()
   const status = effectiveJobStatus(job)
-  const related = getPublicJobs().filter((item) => item.slug !== job.slug && item.companySlug === job.companySlug).slice(0, 3)
+  const related = (await getPublicJobs()).filter((item) => item.slug !== job.slug && item.companySlug === job.companySlug).slice(0, 3)
   const schema = status !== "expired" && job.datePosted && job.remoteType === "Remote" && job.remoteEligibility?.length ? {"@context": "https://schema.org", "@type": "JobPosting", title: job.title, description: job.description, datePosted: job.datePosted, employmentType: "FULL_TIME", hiringOrganization: {"@type": "Organization", name: job.company, sameAs: job.companyUrl}, jobLocationType: "TELECOMMUTE", applicantLocationRequirements: job.remoteEligibility.map((name) => ({"@type": "Country", name})), url: absoluteUrl(`/jobs/${job.slug}`), directApply: false} : null
   return <main className="job-detail container">
     {schema && <script type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify(schema).replace(/</g, "\\u003c")}} />}

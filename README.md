@@ -147,7 +147,7 @@ Create a Sanity GROQ webhook with these settings:
 - URL: `https://www.thebloxline.com/api/revalidate`
 - Dataset: `production`
 - Trigger on: create, update and delete
-- Filter: `_type in ["article", "siteSettings", "author"]`
+- Filter: `_type in ["article", "job", "siteSettings", "author"]`
 - Projection: `{_type, "slug": slug.current}`
 - Secret: the same private value stored as `SANITY_REVALIDATE_SECRET` in Vercel
 
@@ -161,21 +161,21 @@ Future jobs, memberships, reports, advertising, directories and more authors can
 
 ## Add or expire a job
 
-Jobs are typed records in `content/jobs/jobs.ts`. They remain separate from editorial articles so job status, application links and closing dates can be managed safely.
+Jobs are managed in Sanity. Open [the-bloxline.sanity.studio](https://the-bloxline.sanity.studio), choose **Jobs**, then select an existing role or create a new one. The typed records in `content/jobs/jobs.ts` remain as an emergency fallback if Sanity cannot be reached.
 
 To add a job:
 
 1. Find the role on an official employer or recruitment page.
 2. Open the application link and confirm that the role is still listed.
-3. Copy an existing record in `content/jobs/jobs.ts` and give it a unique `id` and `slug`.
+3. Select **Create new Job** and complete the job title, company and page address.
 4. Write a short Bloxline summary. Do not copy the full employer description.
 5. Add the company, location, work style, employment type, category and relevant tags.
 6. Add the official source and application links.
 7. Record the discovery date, posting date when known and verification date.
-8. Use `active` only after checking the official page. Use `unknown` when availability cannot be confirmed.
-9. Run `npm run typecheck`, preview `/jobs` and the individual job page, then deploy.
+8. Use **Active** only after checking the official page. Use **Check availability** when availability cannot be confirmed.
+9. Publish the document and check the Jobs page after the site refreshes.
 10. Check every listing regularly.
 
-To expire a job, set its status to `expired`. A known closing date in the past also removes it from the current list automatically. Expired jobs stay in the data file for editorial records but are left out of the Jobs landing page, sitemap and JobPosting data.
+To expire a job, open it in Sanity, change **Public status** to **Expired**, then publish. A known closing date in the past also removes it from the current list automatically. Expired jobs remain in Sanity for editorial records but are left out of the Jobs landing page, sitemap and JobPosting data.
 
 The data model already includes optional salary information, featured status and `studioProfileSlug`. A future Studio profile can call `getJobsByStudioProfileSlug` to show its current roles. Employer accounts, payments and candidate features are intentionally not part of this version.

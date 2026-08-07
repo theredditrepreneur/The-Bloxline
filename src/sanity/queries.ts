@@ -89,3 +89,38 @@ export const startHerePageQuery = defineQuery(/* groq */ `
     }
   }
 `)
+
+export const allJobsQuery = defineQuery(/* groq */ `
+  *[_type == "job" && defined(slug.current)]
+  | order(coalesce(datePosted, dateDiscovered) desc, _createdAt desc){
+    _id,
+    "id": coalesce(sourceId, _id),
+    "slug": slug.current,
+    title,
+    company,
+    "companySlug": companySlug.current,
+    companyDescription,
+    companyUrl,
+    location,
+    remoteType,
+    employmentType,
+    category,
+    description,
+    whoItSuits,
+    ecosystemContext,
+    sourceUrl,
+    applicationUrl,
+    dateDiscovered,
+    datePosted,
+    closingDate,
+    verifiedAt,
+    status,
+    featured,
+    salary,
+    salaryCurrency,
+    salaryPeriod,
+    tags,
+    studioProfileSlug,
+    remoteEligibility
+  }
+`)

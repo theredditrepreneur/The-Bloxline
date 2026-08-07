@@ -1,7 +1,7 @@
 import type {Metadata} from "next"
 import Link from "next/link"
 import {JobsBrowser} from "@/components/JobsBrowser"
-import {getPublicJobs} from "../../../content/jobs/jobs"
+import {getPublicJobs} from "@/lib/jobs"
 import {siteConfig} from "@/lib/site"
 
 export const metadata: Metadata = {
@@ -11,8 +11,8 @@ export const metadata: Metadata = {
   openGraph: {title: "Roblox Jobs and Careers | The Bloxline", description: "Explore jobs and career opportunities across the Roblox ecosystem.", url: "/jobs", type: "website"},
 }
 
-export default function JobsPage() {
-  const jobs = getPublicJobs()
+export default async function JobsPage() {
+  const jobs = await getPublicJobs()
   const companies = [...new Map(jobs.map((job) => [job.companySlug, {slug: job.companySlug, name: job.company, description: job.companyDescription, count: jobs.filter((item) => item.companySlug === job.companySlug).length}])).values()]
   const subject = encodeURIComponent("Roblox Job Submission")
   return <>

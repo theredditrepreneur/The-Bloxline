@@ -23,6 +23,11 @@ export async function POST(request: NextRequest) {
       if (body.slug) revalidatePath(`/articles/${body.slug}`)
     }
 
+    if (body?._type === "job") {
+      revalidatePath("/jobs")
+      if (body.slug) revalidatePath(`/jobs/${body.slug}`)
+    }
+
     if (body?._type === "siteSettings") revalidatePath("/", "layout")
     return NextResponse.json({revalidated: true})
   } catch (error) {
