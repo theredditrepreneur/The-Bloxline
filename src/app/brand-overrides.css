@@ -33,6 +33,62 @@
   }
 }
 
+/* Jobs desk */
+.jobs-head p { max-width: 780px; }
+.jobs-head .jobs-subtitle { color: var(--navy); font-size: clamp(1.25rem, 2vw, 1.6rem); font-weight: 700; margin-bottom: 12px; }
+.job-filters { background: var(--wash); border: 1px solid var(--line); padding: 24px; display: grid; gap: 20px; }
+.job-search span, .job-filters legend { color: var(--navy); display: block; font-size: .82rem; font-weight: 800; margin-bottom: 7px; }
+.job-search input { background: white; border: 1px solid #94a3b8; font: inherit; padding: 13px 14px; width: 100%; }
+.job-filters fieldset { border: 0; margin: 0; padding: 0; }
+.filter-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.filter-chips button { background: white; border: 1px solid #94a3b8; color: var(--navy); cursor: pointer; font: inherit; font-size: .85rem; font-weight: 700; padding: 8px 12px; }
+.filter-chips button[aria-pressed="true"] { background: var(--navy); border-color: var(--navy); color: white; }
+.jobs-list { display: grid; gap: 18px; }
+.job-card { border: 1px solid var(--line); padding: 28px; }
+.job-card:hover { border-color: #94a3b8; }
+.job-card-top { align-items: center; color: var(--muted); display: flex; flex-wrap: wrap; font-size: .78rem; font-weight: 800; gap: 12px; text-transform: uppercase; }
+.job-status { border: 1px solid #94a3b8; color: var(--navy); padding: 3px 8px; }
+.job-status-active { border-color: #15803d; color: #166534; }
+.job-status-closing-soon { border-color: #b45309; color: #92400e; }
+.job-card h3 { font-size: clamp(1.6rem, 3vw, 2.3rem); margin: 12px 0 3px; }
+.job-company, .job-detail-company { color: var(--navy); font-weight: 800; margin: 0 0 18px; }
+.job-meta { display: flex; flex-wrap: wrap; gap: 14px 32px; margin: 18px 0; }
+.job-meta div { min-width: 120px; }
+.job-meta dt { color: var(--muted); font-size: .72rem; font-weight: 800; text-transform: uppercase; }
+.job-meta dd { color: var(--navy); margin: 2px 0 0; }
+.job-actions { align-items: center; display: flex; flex-wrap: wrap; gap: 16px 24px; justify-content: space-between; margin-top: 24px; }
+.company-grid, .career-grid, .homepage-job-grid { display: grid; gap: 18px; grid-template-columns: repeat(3, 1fr); }
+.company-card, .career-card, .homepage-job { border: 1px solid var(--line); padding: 24px; }
+.career-card h3, .company-card h3, .homepage-job h3 { font-size: 1.45rem; margin: 10px 0; }
+.homepage-job p { color: var(--muted); margin: 3px 0; }
+.jobs-submit { align-items: center; background: var(--navy); color: white; display: grid; gap: 38px; grid-template-columns: 1fr auto; padding: 42px; }
+.jobs-submit h2 { color: white; font-size: clamp(2rem, 4vw, 3.2rem); margin: 8px 0 14px; }
+.jobs-submit .eyebrow { color: #72a7ff; }
+.jobs-submit small { color: #cbd5e1; display: block; }
+.jobs-disclaimer { border-top: 1px solid var(--line); color: var(--muted); font-size: .82rem; margin-bottom: 52px; padding-bottom: 20px; padding-top: 20px; }
+.job-detail { padding-bottom: 70px; padding-top: 56px; }
+.job-detail header { max-width: 900px; padding: 28px 0 44px; }
+.job-detail h1 { font-size: clamp(2.7rem, 6vw, 5.4rem); margin: 12px 0; }
+.job-detail-grid { border-top: 1px solid var(--line); display: grid; gap: 70px; grid-template-columns: minmax(0, 720px) 240px; padding-top: 44px; }
+.job-detail-grid article { font-family: Georgia, serif; font-size: 1.12rem; line-height: 1.8; }
+.job-detail-grid h2 { font-family: Arial, sans-serif; font-size: 1.8rem; margin-top: 1.7em; }
+.job-detail-grid section:first-child h2 { margin-top: 0; }
+.job-detail-grid a { color: var(--blue); text-decoration: underline; }
+.job-detail-grid aside { border-top: 3px solid var(--navy); font-size: .85rem; padding-top: 14px; }
+.related-jobs { border-top: 1px solid var(--line); margin-top: 50px; padding-top: 30px; }
+
+@media (max-width: 900px) {
+  .company-grid, .career-grid, .homepage-job-grid { grid-template-columns: 1fr 1fr; }
+  .job-detail-grid { grid-template-columns: 1fr; gap: 30px; }
+}
+
+@media (max-width: 600px) {
+  .job-card, .job-filters { padding: 20px; }
+  .company-grid, .career-grid, .homepage-job-grid { grid-template-columns: 1fr; }
+  .jobs-submit { grid-template-columns: 1fr; padding: 28px 22px; }
+  .job-actions .button { text-align: center; width: 100%; }
+}
+
 /* Keep page and article copy comfortably away from every screen edge. */
 .section {
   padding-top: clamp(42px, 4vw, 56px);

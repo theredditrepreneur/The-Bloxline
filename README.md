@@ -69,7 +69,7 @@ Local MDX fallback articles can use `featured: true` for the homepage lead slot.
 
 Supported frontmatter includes title, slug, subtitle, excerpt, dates, author, desk, topics, cover information, featured and draft states, SEO fields, canonical URL, source links, disclosure and audience relevance notes. Reading time is generated when it is omitted.
 
-Available MDX callouts: `WhatAdultsNeedToKnow`, `WhyItMatters`, `ForParents`, `ForTeachers`, `BusinessAngle`, `InPlainEnglish`, `KeyTakeaways`, `BloxlineView` and `EditorNote`. Sanity offers the same callout choices in its article editor.
+Available MDX callouts: `WhatAdultsNeedToKnow`, `WhyItMatters`, `ForParents`, `ForTeachers`, `BusinessAngle`, `InPlainEnglish`, `KeyTakeaways`, `BloxlineView`, `EditorNote` and `JobsCallout`. Use `JobsCallout` only in relevant career, education, studio or industry articles. Sanity offers the main editorial callout choices in its article editor.
 
 ## Editorial checklist
 
@@ -158,3 +158,24 @@ Enable drafts only if draft changes should refresh public pages. The endpoint ve
 The Sanity schemas live in `studio/schemaTypes`. Website queries live in `src/sanity`, and the shared article adapter lives in `src/lib/articles.ts`. The six starter articles were imported into the `production` dataset. Three current editorial drafts remain hidden from readers.
 
 Future jobs, memberships, reports, advertising, directories and more authors can be added as separate content types when their workflows are defined.
+
+## Add or expire a job
+
+Jobs are typed records in `content/jobs/jobs.ts`. They remain separate from editorial articles so job status, application links and closing dates can be managed safely.
+
+To add a job:
+
+1. Find the role on an official employer or recruitment page.
+2. Open the application link and confirm that the role is still listed.
+3. Copy an existing record in `content/jobs/jobs.ts` and give it a unique `id` and `slug`.
+4. Write a short Bloxline summary. Do not copy the full employer description.
+5. Add the company, location, work style, employment type, category and relevant tags.
+6. Add the official source and application links.
+7. Record the discovery date, posting date when known and verification date.
+8. Use `active` only after checking the official page. Use `unknown` when availability cannot be confirmed.
+9. Run `npm run typecheck`, preview `/jobs` and the individual job page, then deploy.
+10. Check every listing regularly.
+
+To expire a job, set its status to `expired`. A known closing date in the past also removes it from the current list automatically. Expired jobs stay in the data file for editorial records but are left out of the Jobs landing page, sitemap and JobPosting data.
+
+The data model already includes optional salary information, featured status and `studioProfileSlug`. A future Studio profile can call `getJobsByStudioProfileSlug` to show its current roles. Employer accounts, payments and candidate features are intentionally not part of this version.

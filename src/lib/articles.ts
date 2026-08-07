@@ -7,7 +7,7 @@ import {z} from "zod"
 import {sanityFetch} from "@/sanity/live"
 import {allArticlesIncludingEditorialDraftsQuery, allArticlesQuery, featuredArticleQuery} from "@/sanity/queries"
 
-export const desks = ["Parents", "Industry", "Games", "Studios", "Education"] as const
+export const desks = ["Parents", "Industry", "Games", "Studios", "Jobs", "Education"] as const
 export type Desk = (typeof desks)[number]
 
 const articleSchema = z.object({

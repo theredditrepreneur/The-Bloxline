@@ -1,7 +1,7 @@
 import {DocumentTextIcon} from "@sanity/icons/DocumentText"
 import {defineArrayMember, defineField, defineType} from "sanity"
 
-const deskOptions = ["Parents", "Industry", "Games", "Studios", "Education"].map((value) => ({title: value, value}))
+const deskOptions = ["Parents", "Industry", "Games", "Studios", "Jobs", "Education"].map((value) => ({title: value, value}))
 
 export const articleType = defineType({
   name: "article",

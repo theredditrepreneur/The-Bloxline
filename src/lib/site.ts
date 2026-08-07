@@ -9,6 +9,7 @@ export type SiteSettings = {
   founder: string
   url: string
   contactEmail: string
+  jobsEmail: string
   social: Record<string, string>
   logos: {horizontal: string; compact: string; favicon: string}
   defaultSocialImage?: string
@@ -23,6 +24,7 @@ export const siteConfig: SiteSettings = {
   founder: "Tonte Bo Douglas",
   url: configuredUrl || (vercelUrl ? `https://${vercelUrl}` : "http://localhost:3000"),
   contactEmail: process.env.NEXT_PUBLIC_CONTACT_EMAIL || "hello@thebloxline.com",
+  jobsEmail: process.env.NEXT_PUBLIC_JOBS_EMAIL || "thebloxline@gmail.com",
   social: {
     Instagram: "https://www.instagram.com/thebloxline",
     YouTube: "https://youtube.com/@thebloxline",

@@ -4,7 +4,7 @@ import Image from "next/image"
 import Link from "next/link"
 import {useState} from "react"
 
-const links = [["Latest", "/latest"], ["Parents", "/parents"], ["Industry", "/industry"], ["Games", "/games"], ["Studios", "/studios"], ["Education", "/education"], ["Start Here", "/start-here"], ["About", "/about"]]
+const links = [["Latest", "/latest"], ["Parents", "/parents"], ["Games", "/games"], ["Industry", "/industry"], ["Studios", "/studios"], ["Jobs", "/jobs"], ["Education", "/education"], ["Start Here", "/start-here"], ["About", "/about"]]
 
 export function Header({name, logo}: {name: string; logo: string}) {
   const [open, setOpen] = useState(false)

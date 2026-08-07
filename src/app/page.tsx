@@ -3,6 +3,7 @@ import { ArticleCard, ArticleCover } from "@/components/ArticleCard";
 import { Newsletter } from "@/components/Newsletter";
 import { getAllArticles, getFeatured } from "@/lib/articles";
 import { formatArticleDate } from "@/lib/article-date";
+import { getPublicJobs } from "../../content/jobs/jobs";
 
 const deskCopy = {
   Parents: "Clear guidance for adults raising children who use Roblox.",
@@ -10,12 +11,14 @@ const deskCopy = {
   Games: "The experiences people play, how they work and why they matter.",
   Studios: "The teams and businesses building Roblox experiences.",
   Education: "How schools, teachers and learners use and respond to Roblox.",
+  Jobs: "Current opportunities and clear guidance for careers across Roblox.",
 };
 
 export default async function Home() {
   const articles = await getAllArticles(false);
   const featured = await getFeatured();
   const latest = articles.filter((article) => article.slug !== featured?.slug).slice(0, 6);
+  const latestJobs = getPublicJobs().slice(0, 3);
 
   return (
     <>
@@ -52,6 +55,11 @@ export default async function Home() {
       <section className="section container">
         <div className="section-heading"><h2>Latest stories</h2><Link className="text-link" href="/latest">View latest</Link></div>
         <div className="article-grid">{latest.map((article) => <ArticleCard key={article.slug} article={article} />)}</div>
+      </section>
+
+      <section className="section container homepage-jobs">
+        <div className="section-heading"><h2>Latest Roblox Jobs</h2><Link className="text-link" href="/jobs">View all jobs</Link></div>
+        <div className="homepage-job-grid">{latestJobs.map((job) => <Link href={`/jobs/${job.slug}`} className="homepage-job" key={job.id}><span className="eyebrow">{job.remoteType}</span><h3>{job.title}</h3><p>{job.company}</p><p>{job.location}</p></Link>)}</div>
       </section>
 
       <section className="section container">
