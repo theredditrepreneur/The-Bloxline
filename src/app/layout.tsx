@@ -17,7 +17,7 @@ export async function generateMetadata(): Promise<Metadata> {
     title: {default: `${settings.name} | ${settings.tagline}`, template: `%s | ${settings.name}`},
     description: settings.description,
     alternates: {canonical: "/"},
-    icons: {icon: [{url: settings.logos.favicon}], apple: settings.logos.favicon},
+    icons: {icon: [{url: "/favicon.png", type: "image/png", sizes: "512x512"}], shortcut: "/favicon.png", apple: "/apple-touch-icon.png"},
     openGraph: {type: "website", siteName: settings.name, title: settings.name, description: settings.description, ...(socialImage ? {images: [{url: socialImage, width: 1254, height: 434, alt: `${settings.name}: ${settings.tagline}`}]} : {})},
     twitter: {card: socialImage ? "summary_large_image" : "summary", title: settings.name, description: settings.description, ...(socialImage ? {images: [socialImage]} : {})},
   }

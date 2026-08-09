@@ -11,7 +11,7 @@ export const jobType = defineType({
   groups: [
     {name: "role", title: "Role", default: true},
     {name: "application", title: "Application"},
-    {name: "editorial", title: "Bloxline summary"},
+    {name: "editorial", title: "About the job"},
     {name: "publishing", title: "Status and dates"},
   ],
   fields: [
@@ -28,9 +28,10 @@ export const jobType = defineType({
     defineField({name: "tags", title: "Search tags", type: "array", group: "role", of: [defineArrayMember({type: "string"})], options: {layout: "tags"}, validation: (rule) => rule.unique()}),
     defineField({name: "sourceUrl", title: "Official job listing", type: "url", group: "application", validation: (rule) => rule.required().uri({scheme: ["http", "https"]})}),
     defineField({name: "applicationUrl", title: "Application link", type: "url", group: "application", validation: (rule) => rule.required().uri({scheme: ["http", "https"]})}),
-    defineField({name: "description", title: "Short Bloxline summary", type: "text", rows: 3, group: "editorial", validation: (rule) => rule.required().min(30).max(400)}),
-    defineField({name: "whoItSuits", title: "Who this role might suit", type: "text", rows: 3, group: "editorial", validation: (rule) => rule.required().min(30)}),
-    defineField({name: "ecosystemContext", title: "Why it matters in Roblox", type: "text", rows: 3, group: "editorial", validation: (rule) => rule.required().min(30)}),
+    defineField({name: "description", title: "About The Job Role", type: "text", rows: 14, group: "editorial", description: "Paste the employer's job description here, or write your own summary if you prefer.", validation: (rule) => rule.required().min(30)}),
+    defineField({name: "whoItSuits", title: "Who this role might suit", type: "text", rows: 3, group: "editorial", readOnly: true, hidden: true, deprecated: {reason: "This content has been moved into About The Job Role."}}),
+    defineField({name: "ecosystemContext", title: "Why it matters in Roblox", type: "text", rows: 3, group: "editorial", readOnly: true, hidden: true, deprecated: {reason: "This content has been moved into About The Job Role."}}),
+    defineField({name: "editorialMigrationVersion", title: "Editorial migration version", type: "number", readOnly: true, hidden: true}),
     defineField({name: "status", title: "Public status", type: "string", group: "publishing", initialValue: "unknown", options: {list: [{title: "Active", value: "active"}, {title: "Closing soon", value: "closing-soon"}, {title: "Expired", value: "expired"}, {title: "Check availability", value: "unknown"}], layout: "radio"}, validation: (rule) => rule.required()}),
     defineField({name: "featured", title: "Feature this role", type: "boolean", group: "publishing", initialValue: false}),
     defineField({name: "dateDiscovered", title: "Date discovered", type: "date", group: "publishing", initialValue: () => new Date().toISOString().slice(0, 10), validation: (rule) => rule.required()}),

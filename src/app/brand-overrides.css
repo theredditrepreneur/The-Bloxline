@@ -51,6 +51,7 @@
 .job-status-active { border-color: #15803d; color: #166534; }
 .job-status-closing-soon { border-color: #b45309; color: #92400e; }
 .job-card h3 { font-size: clamp(1.6rem, 3vw, 2.3rem); margin: 12px 0 3px; }
+.job-card-summary { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; white-space: pre-line; }
 .job-company, .job-detail-company { color: var(--navy); font-weight: 800; margin: 0 0 18px; }
 .job-meta { display: flex; flex-wrap: wrap; gap: 14px 32px; margin: 18px 0; }
 .job-meta div { min-width: 120px; }
@@ -71,6 +72,7 @@
 .job-detail h1 { font-size: clamp(2.7rem, 6vw, 5.4rem); margin: 12px 0; }
 .job-detail-grid { border-top: 1px solid var(--line); display: grid; gap: 70px; grid-template-columns: minmax(0, 720px) 240px; padding-top: 44px; }
 .job-detail-grid article { font-family: Georgia, serif; font-size: 1.12rem; line-height: 1.8; }
+.job-role-copy { white-space: pre-line; }
 .job-detail-grid h2 { font-family: Arial, sans-serif; font-size: 1.8rem; margin-top: 1.7em; }
 .job-detail-grid section:first-child h2 { margin-top: 0; }
 .job-detail-grid a { color: var(--blue); text-decoration: underline; }
