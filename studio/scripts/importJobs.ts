@@ -3,6 +3,16 @@ import {jobs} from "../../content/jobs/jobs"
 
 const client = getCliClient({apiVersion: "2026-08-07"})
 
+function textBlock(text: string, index = 0, style = "normal") {
+  return {
+    _type: "block",
+    _key: `block-${index}`,
+    style,
+    markDefs: [],
+    children: [{_type: "span", _key: `span-${index}`, text, marks: []}],
+  }
+}
+
 async function run() {
   for (const job of jobs) {
     const {_id} = await client.createOrReplace({
@@ -19,6 +29,7 @@ async function run() {
       remoteType: job.remoteType,
       employmentType: job.employmentType,
       category: job.category,
+      aboutRole: [textBlock(job.description)],
       description: job.description,
       whoItSuits: job.whoItSuits,
       ecosystemContext: job.ecosystemContext,
@@ -36,6 +47,7 @@ async function run() {
       tags: job.tags,
       studioProfileSlug: job.studioProfileSlug,
       remoteEligibility: job.remoteEligibility,
+      portableTextMigrationVersion: 1,
     })
     console.log(`Imported ${job.title} as ${_id}`)
   }

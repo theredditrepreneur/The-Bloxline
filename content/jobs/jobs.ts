@@ -15,6 +15,7 @@ export type Job = {
   employmentType: string
   category: (typeof jobCategories)[number]
   description: string
+  aboutRole?: unknown[]
   whoItSuits?: string
   ecosystemContext?: string
   sourceUrl: string

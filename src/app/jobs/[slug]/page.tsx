@@ -4,6 +4,7 @@ import {notFound} from "next/navigation"
 import {effectiveJobStatus} from "../../../../content/jobs/jobs"
 import {getAllJobs, getJob, getPublicJobs} from "@/lib/jobs"
 import {absoluteUrl} from "@/lib/site"
+import {SanityBody} from "@/components/SanityBody"
 
 const statusLabels = {active: "Active", "closing-soon": "Closing soon", expired: "Expired", unknown: "Check availability"}
 export async function generateStaticParams() { return (await getAllJobs()).map(({slug}) => ({slug})) }
@@ -23,7 +24,7 @@ export default async function JobPage({params}: JobPageProps) {
     {schema && <script type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify(schema).replace(/</g, "\\u003c")}} />}
     <Link className="text-link" href="/jobs">All Roblox jobs</Link>
     <header><div className="job-card-top"><span className={`job-status job-status-${status}`}>{statusLabels[status]}</span><span>{job.category}</span></div><h1>{job.title}</h1><p className="job-detail-company">{job.company}</p><dl className="job-meta"><div><dt>Location</dt><dd>{job.location}</dd></div><div><dt>Work style</dt><dd>{job.remoteType}</dd></div><div><dt>Employment</dt><dd>{job.employmentType}</dd></div>{job.datePosted && <div><dt>Posted</dt><dd>{new Intl.DateTimeFormat("en-GB", {dateStyle: "long"}).format(new Date(job.datePosted))}</dd></div>}{job.closingDate && <div><dt>Closing date</dt><dd>{new Intl.DateTimeFormat("en-GB", {dateStyle: "long"}).format(new Date(job.closingDate))}</dd></div>}</dl><a className="button" href={job.applicationUrl} target="_blank" rel="noopener noreferrer">Apply on the {job.company} website</a></header>
-    <div className="job-detail-grid"><article><section><h2>About The Job Role</h2><p className="job-role-copy">{job.description}</p></section><section><h2>Original source</h2><p>This information was prepared from the official listing. <a href={job.sourceUrl} target="_blank" rel="noopener noreferrer">Read the original job listing</a>.</p></section></article><aside><strong>Before applying</strong><p>Check the employer page for the full requirements and the latest status. The employer handles every application.</p></aside></div>
+    <div className="job-detail-grid"><article><section><h2>About The Job Role</h2><div className="job-role-copy">{job.aboutRole?.length ? <SanityBody value={job.aboutRole}/> : <p>{job.description}</p>}</div></section><section><h2>Original source</h2><p>This information was prepared from the official listing. <a href={job.sourceUrl} target="_blank" rel="noopener noreferrer">Read the original job listing</a>.</p></section></article><aside><strong>Before applying</strong><p>Check the employer page for the full requirements and the latest status. The employer handles every application.</p></aside></div>
     {!!related.length && <section className="related-jobs"><h2>More roles at {job.company}</h2>{related.map((item) => <p key={item.slug}><Link className="text-link" href={`/jobs/${item.slug}`}>{item.title}</Link> · {item.location}</p>)}</section>}
     <aside className="jobs-disclaimer"><p>The Bloxline curates job opportunities from official company and recruitment sources. Roles can close or change without notice. Always check the original listing before applying. The Bloxline is not the employer and does not manage applications unless explicitly stated.</p></aside>
   </main>

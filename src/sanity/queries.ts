@@ -105,6 +105,7 @@ export const allJobsQuery = defineQuery(/* groq */ `
     remoteType,
     employmentType,
     category,
+    aboutRole,
     description,
     whoItSuits,
     ecosystemContext,
