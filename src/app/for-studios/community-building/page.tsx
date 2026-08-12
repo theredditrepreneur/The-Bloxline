@@ -81,9 +81,9 @@ export default function CommunityBuildingPage() {
         </div>
       </section>
 
-      <section className="service-section container service-split">
-        <div><span className="eyebrow">Who this is for</span><h2>Built for Roblox developers and studios</h2></div>
-        <div><p>This service may be useful if:</p><ul className="service-check-list">{audiences.map((item) => <li key={item}>{item}</li>)}</ul><p className="service-note">We will always start by understanding your game and whether Reddit is actually the right community platform for it.</p></div>
+      <section className="service-section container service-audience">
+        <div className="service-intro"><span className="eyebrow">Who this is for</span><h2>Built for Roblox developers and studios</h2><p>This service may be useful if:</p></div>
+        <div className="service-audience-grid"><ul className="service-check-list">{audiences.map((item) => <li key={item}>{item}</li>)}</ul><p className="service-note">We will always start by understanding your game and whether Reddit is actually the right community platform for it.</p></div>
       </section>
 
       <section className="service-section container">
