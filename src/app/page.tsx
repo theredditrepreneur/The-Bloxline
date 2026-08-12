@@ -87,6 +87,14 @@ export default async function Home() {
           <Link className="button" href="/start-here">Read the Start Here guide</Link>
         </div>
       </section>
+      <section className="section container homepage-studios-service">
+        <div>
+          <span className="eyebrow">For Roblox Studios</span>
+          <h2>Build more than a player base. Build a community.</h2>
+          <p>Bloxline helps Roblox developers and studios establish communities around their games, starting with Reddit.</p>
+        </div>
+        <Link className="button" href="/for-studios/community-building">Explore Community Building</Link>
+      </section>
       <section className="container" style={{ paddingBottom: 64 }}><Newsletter /></section>
     </>
   );
