@@ -19,9 +19,9 @@ export type SiteSettings = {
 
 export const siteConfig: SiteSettings = {
   name: "The Bloxline",
-  tagline: "The Adult’s Guide to Roblox",
-  description: "The Bloxline explains the games, businesses, studios, creators, education, safety and culture shaping Roblox.",
-  footerDescription: "The Bloxline helps adults understand the games, companies, creators and culture shaping Roblox.",
+  tagline: "Roblox Community And Audience Services",
+  description: "The Bloxline helps Roblox games, studios and brands build communities, understand audiences and connect with people beyond the game.",
+  footerDescription: "Roblox community and audience services for games, studios and brands.",
   founder: "Tonte Bo Douglas",
   url: configuredUrl || (vercelUrl ? `https://${vercelUrl}` : "http://localhost:3000"),
   contactEmail: process.env.NEXT_PUBLIC_CONTACT_EMAIL || "hello@thebloxline.com",
@@ -36,7 +36,7 @@ export const siteConfig: SiteSettings = {
   },
   logos: {horizontal: "/brand/bloxline-banner.jpg", compact: "/brand/bloxline-logo.jpg", favicon: "/brand/bloxline-favicon.jpg"},
   defaultSocialImage: undefined,
-  disclaimer: "The Bloxline is an independent publication and is not affiliated with, endorsed by or operated by Roblox Corporation.",
+  disclaimer: "The Bloxline is an independent business and publication and is not affiliated with, endorsed by or operated by Roblox Corporation.",
 }
 
 export const absoluteUrl = (path = "/") => new URL(path, siteConfig.url).toString()
