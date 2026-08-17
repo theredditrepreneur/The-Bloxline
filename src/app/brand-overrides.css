@@ -7,6 +7,51 @@
   flex: 0 0 190px;
 }
 
+/* GEEIQ affiliate opportunity */
+.geeiq-sitewide { padding: 30px 0; border-top: 1px solid #bfd2ef; background: #edf4ff; }
+.geeiq-sitewide .container { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 34px; }
+.geeiq-sitewide h2 { margin: 5px 0; font-size: clamp(1.55rem, 2.7vw, 2.35rem); }
+.geeiq-sitewide p { margin: 0; }
+.geeiq-sitewide .button { white-space: nowrap; }
+.affiliate-note { max-width: 760px; margin: 12px 0 0 !important; color: var(--muted); font-size: .76rem !important; line-height: 1.5; }
+.geeiq-sitewide > .container > div:last-child .affiliate-note { max-width: 360px; }
+.geeiq-feature { padding: clamp(52px, 6vw, 76px) 0; background: var(--navy); color: #d8e3f2; }
+.geeiq-feature .eyebrow { color: #72a7ff; }
+.geeiq-feature h2 { max-width: 840px; margin: 10px 0 18px; color: #fff; font-size: clamp(2.5rem, 5vw, 4.5rem); text-wrap: balance; }
+.geeiq-feature-intro > p { max-width: 800px; font-size: 1.08rem; }
+.geeiq-benefits { display: grid; grid-template-columns: repeat(4, 1fr); margin: 32px 0; border-top: 1px solid #ffffff35; border-left: 1px solid #ffffff35; }
+.geeiq-benefits div { min-height: 150px; padding: 24px; border-right: 1px solid #ffffff35; border-bottom: 1px solid #ffffff35; color: #fff; font-weight: 700; }
+.geeiq-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 24px; }
+.geeiq-feature .text-link { color: #72a7ff; }
+.geeiq-feature .affiliate-note { color: #aebed3; }
+.developer-network-benefits { padding-top: clamp(52px, 6vw, 76px); padding-bottom: clamp(52px, 6vw, 76px); }
+.developer-benefit-grid { display: grid; grid-template-columns: repeat(2, 1fr); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+.developer-benefit-grid article { padding: 28px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.developer-benefit-grid h3 { margin: 0 0 12px; font-size: 1.65rem; }
+.developer-benefit-grid p { margin: 0; color: #475569; }
+.developer-network-details { background: var(--navy); color: #d8e3f2; }
+.developer-network-details h2 { color: #fff; }
+.developer-network-details .eyebrow { color: #72a7ff; }
+.developer-network-cta { max-width: 880px; padding-top: clamp(52px, 6vw, 76px); padding-bottom: clamp(52px, 6vw, 76px); text-align: center; }
+.developer-network-cta h2 { margin: 0 0 16px; font-size: clamp(2.5rem, 5vw, 4.4rem); }
+.developer-network-cta > p:not(.affiliate-note) { font-size: 1.1rem; }
+.developer-network-cta .affiliate-note { margin-left: auto !important; margin-right: auto !important; }
+.affiliate-disclosure { max-width: 880px; margin-bottom: clamp(52px, 6vw, 76px); padding-top: 30px; padding-bottom: 30px; border-top: 1px solid var(--line); }
+.affiliate-disclosure h2 { margin: 0 0 14px; font-size: 1.8rem; }
+.affiliate-disclosure p { color: #475569; }
+
+@media (max-width: 900px) {
+  .geeiq-benefits { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 600px) {
+  .geeiq-sitewide .container, .geeiq-benefits, .developer-benefit-grid { grid-template-columns: 1fr; }
+  .geeiq-sitewide .button { width: 100%; text-align: center; white-space: normal; }
+  .geeiq-benefits div { min-height: 0; }
+  .geeiq-actions { align-items: stretch; flex-direction: column; }
+  .geeiq-actions .button { width: 100%; text-align: center; }
+}
+
 /* Business first positioning */
 .header-cta { padding: 9px 14px; background: var(--blue); color: #fff; font-size: .78rem; font-weight: 850; }
 .header-cta:hover { background: var(--navy); color: #fff; }

@@ -4,6 +4,7 @@ import {ArticleCard} from "@/components/ArticleCard"
 import {getAllArticles} from "@/lib/articles"
 import {getPublicJobs} from "@/lib/jobs"
 import {siteConfig} from "@/lib/site"
+import {GeeiqReferral} from "@/components/GeeiqReferral"
 
 export const metadata: Metadata = {
   title: {absolute: "The Bloxline | Roblox Community Building for Games, Studios and Brands"},
@@ -54,6 +55,8 @@ export default async function Home() {
     </section>
 
     <section className="agency-current container"><span className="eyebrow">Current Community Work</span><h2>Building stronger community infrastructure around Roblox games.</h2><p>The Bloxline is currently in discussions with Roblox studios and developers about building stronger community infrastructure around their games, including the relationship between Reddit, Discord and existing Roblox audiences.</p></section>
+
+    <GeeiqReferral featured/>
 
     <section className="section container agency-insights">
       <div className="section-heading"><div><span className="eyebrow">Authority and insight</span><h2>Roblox Intelligence And Guides</h2></div><Link className="text-link" href="/latest">View all insights</Link></div>

@@ -7,6 +7,7 @@ import {Footer} from "@/components/Footer"
 import {getSiteSettings} from "@/lib/sanity-content"
 import {SanityLive} from "@/sanity/live"
 import {siteConfig} from "@/lib/site"
+import {GeeiqReferral} from "@/components/GeeiqReferral"
 
 const inter = Inter({subsets: ["latin"], display: "swap"})
 
@@ -27,5 +28,5 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function RootLayout({children}: {children: React.ReactNode}) {
   const settings = await getSiteSettings()
   const organisation = {"@context": "https://schema.org", "@type": "Organization", name: settings.name, url: settings.url, logo: new URL(settings.logos.compact, settings.url).toString(), founder: {"@type": "Person", name: settings.founder}, description: siteConfig.description, knowsAbout: ["Roblox community building", "Roblox audience strategy", "Roblox industry insights"]}
-  return <html lang="en-GB"><body className={inter.className}><a className="skip-link" href="#main">Skip to content</a><Header name={settings.name} logo={settings.logos.compact} email={settings.commercialEmail}/><main id="main">{children}</main><Footer settings={settings}/><SanityLive/><script type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify(organisation).replace(/</g, "\\u003c")}}/></body></html>
+  return <html lang="en-GB"><body className={inter.className}><a className="skip-link" href="#main">Skip to content</a><Header name={settings.name} logo={settings.logos.compact} email={settings.commercialEmail}/><main id="main">{children}</main><GeeiqReferral/><Footer settings={settings}/><SanityLive/><script type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify(organisation).replace(/</g, "\\u003c")}}/></body></html>
 }
