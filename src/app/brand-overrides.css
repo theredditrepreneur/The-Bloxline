@@ -30,9 +30,10 @@
 .developer-benefit-grid h3 { margin: 0 0 12px; font-size: 1.65rem; }
 .developer-benefit-grid p { margin: 0; color: #475569; }
 .developer-network-details { background: var(--navy); color: #d8e3f2; }
+.developer-network-details .agency-proof-grid { padding-top: clamp(38px, 4vw, 52px); padding-bottom: clamp(38px, 4vw, 52px); }
 .developer-network-details h2 { color: #fff; }
 .developer-network-details .eyebrow { color: #72a7ff; }
-.developer-network-cta { max-width: 880px; padding-top: clamp(52px, 6vw, 76px); padding-bottom: clamp(52px, 6vw, 76px); text-align: center; }
+.developer-network-cta { max-width: 880px; padding-top: clamp(36px, 4vw, 50px); padding-bottom: clamp(36px, 4vw, 50px); text-align: center; }
 .developer-network-cta h2 { margin: 0 0 16px; font-size: clamp(2.5rem, 5vw, 4.4rem); }
 .developer-network-cta > p:not(.affiliate-note) { font-size: 1.1rem; }
 .developer-network-cta .affiliate-note { margin-left: auto !important; margin-right: auto !important; }
