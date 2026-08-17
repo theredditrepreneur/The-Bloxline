@@ -31,11 +31,13 @@
 .developer-benefit-grid p { margin: 0; color: #475569; }
 .developer-network-details { background: var(--navy); color: #d8e3f2; }
 .developer-network-details .agency-proof-grid { padding-top: clamp(38px, 4vw, 52px); padding-bottom: clamp(38px, 4vw, 52px); }
+.developer-network-details .agency-proof-grid > div:last-child p { margin: 0 0 18px; }
+.developer-network-details .agency-proof-grid > div:last-child p:last-child { margin-bottom: 0; }
 .developer-network-details h2 { color: #fff; }
 .developer-network-details .eyebrow { color: #72a7ff; }
 .developer-network-cta { max-width: 880px; padding-top: clamp(36px, 4vw, 50px); padding-bottom: clamp(36px, 4vw, 50px); text-align: center; }
 .developer-network-cta h2 { margin: 0 0 16px; font-size: clamp(2.5rem, 5vw, 4.4rem); }
-.developer-network-cta > p:not(.affiliate-note) { font-size: 1.1rem; }
+.developer-network-cta > p:not(.affiliate-note) { margin: 0 0 24px; font-size: 1.1rem; }
 .developer-network-cta .affiliate-note { margin-left: auto !important; margin-right: auto !important; }
 .affiliate-disclosure { max-width: 880px; margin-bottom: clamp(52px, 6vw, 76px); padding-top: 30px; padding-bottom: 30px; border-top: 1px solid var(--line); }
 .affiliate-disclosure h2 { margin: 0 0 14px; font-size: 1.8rem; }
