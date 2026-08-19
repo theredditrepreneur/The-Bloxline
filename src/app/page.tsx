@@ -70,6 +70,8 @@ export default async function Home() {
       <div className="homepage-job-grid">{jobs.map((job) => <Link href={`/jobs/${job.slug}`} className="homepage-job" key={job.id}><span className="eyebrow">{job.remoteType}</span><h3>{job.title}</h3><p>{job.company}</p><p>{job.location}</p></Link>)}</div>
     </section>
 
+    <section className="homepage-affiliates container"><div><span className="eyebrow">Commercial partnerships</span><h2>Partner with The Bloxline</h2><p>We are open to carefully selected affiliate and referral partnerships with products and services relevant to the Roblox ecosystem.</p></div><Link className="button" href="/affiliates">Affiliate Partnerships</Link></section>
+
     <section className="agency-final"><div className="container"><h2>Building something on Roblox?</h2><p>Whether you want to create a stronger community around your game, prepare for a new launch or communicate with audiences beyond Roblox, tell us what you are working on.</p><a className="button" href={generalEmail}>Start A Conversation</a></div></section>
   </>
 }

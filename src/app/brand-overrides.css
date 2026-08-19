@@ -42,6 +42,31 @@
 .affiliate-disclosure { max-width: 880px; margin-bottom: clamp(52px, 6vw, 76px); padding-top: 30px; padding-bottom: 30px; border-top: 1px solid var(--line); }
 .affiliate-disclosure h2 { margin: 0 0 14px; font-size: 1.8rem; }
 .affiliate-disclosure p { color: #475569; }
+.affiliate-hero .container > p:not(.affiliate-note) { margin: 0 0 14px; }
+.affiliate-hero .container > p:nth-of-type(3) { margin-bottom: 24px; }
+.affiliate-categories { padding: clamp(54px, 6vw, 76px) 0; }
+.affiliate-category-grid, .affiliate-work-grid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+.affiliate-category-card, .affiliate-work-grid article { padding: 26px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.affiliate-category-card h3, .affiliate-work-grid h3 { margin: 0 0 14px; font-size: 1.55rem; }
+.affiliate-category-card ul { margin: 0 0 20px; padding-left: 1.2em; list-style: disc outside; columns: 2; column-gap: 22px; }
+.affiliate-category-card li { margin: 6px 0; break-inside: avoid; }
+.affiliate-category-card p, .affiliate-work-grid p { margin: 0; color: #475569; }
+.affiliate-category-card .affiliate-category-note { margin-top: 18px; padding: 14px; border-left: 3px solid var(--blue); background: var(--wash); color: var(--navy); font-weight: 700; font-size: .92rem; }
+.affiliate-relevance, .affiliate-transparency { background: var(--navy); color: #d8e3f2; }
+.affiliate-relevance h2, .affiliate-transparency h2 { color: #fff; }
+.affiliate-relevance .eyebrow, .affiliate-transparency .eyebrow { color: #72a7ff; }
+.affiliate-relevance .agency-proof-grid > div:last-child p, .affiliate-transparency .agency-proof-grid > div:last-child p { margin: 0 0 1em; font-size: 1.05rem; }
+.affiliate-relevance ul { margin: 0 0 24px; padding-left: 1.2em; list-style: disc outside; columns: 2; column-gap: 32px; }
+.affiliate-relevance li { margin: 7px 0; }
+.affiliate-how, .affiliate-audience { padding-top: clamp(54px, 6vw, 76px); padding-bottom: clamp(54px, 6vw, 76px); }
+.affiliate-work-grid article { min-height: 180px; }
+.affiliate-closing-copy, .affiliate-audience > p { margin: 28px 0 0; color: #475569; font-size: 1.05rem; }
+.affiliate-current { padding: clamp(52px, 6vw, 72px) 0; background: var(--wash); }
+.affiliate-current .agency-section-head { margin-bottom: 0; }
+.affiliate-final p + p { margin-top: 14px; }
+.homepage-affiliates { margin-bottom: clamp(48px, 5vw, 68px); padding: clamp(34px, 5vw, 50px); display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 34px; border-top: 4px solid var(--blue); background: var(--wash); }
+.homepage-affiliates h2 { margin: 10px 0 12px; font-size: clamp(2rem, 4vw, 3.3rem); }
+.homepage-affiliates p { max-width: 760px; margin: 0; color: #475569; }
 
 @media (max-width: 900px) {
   .geeiq-benefits { grid-template-columns: 1fr 1fr; }
@@ -137,6 +162,7 @@
 @media (max-width: 900px) {
   .agency-lead, .agency-proof-grid, .adult-origin, .adult-support, .studio-structure, .community-insight, .agency-pricing-preview { grid-template-columns: 1fr; }
   .agency-service-grid, .pricing-grid, .formats-grid { grid-template-columns: 1fr 1fr; }
+  .affiliate-category-grid, .affiliate-work-grid { grid-template-columns: 1fr 1fr; }
   .pricing-card > p { min-height: 0; }
   .audience-chip-grid { grid-template-columns: repeat(2, 1fr); }
 }
@@ -146,7 +172,9 @@
   .agency-hero { padding: 50px 0; }
   .agency-hero h1 { font-size: clamp(3rem, 14vw, 4.6rem); }
   .agency-actions .button { width: 100%; text-align: center; }
-  .agency-service-grid, .pricing-grid, .formats-grid, .platform-grid, .platform-explainer, .audience-chip-grid, .service-price-callout, .about-service-links { grid-template-columns: 1fr; }
+  .agency-service-grid, .pricing-grid, .formats-grid, .platform-grid, .platform-explainer, .audience-chip-grid, .service-price-callout, .about-service-links, .affiliate-category-grid, .affiliate-work-grid, .homepage-affiliates { grid-template-columns: 1fr; }
+  .affiliate-category-card ul, .affiliate-relevance ul { columns: 1; }
+  .homepage-affiliates { padding: 28px 22px; }
   .platform-grid article { border-right: 0; border-bottom: 1px solid var(--line); }
   .platform-grid article:last-child { border-bottom: 0; }
   .adult-support ul { columns: 1; }
