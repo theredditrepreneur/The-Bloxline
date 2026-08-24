@@ -10,6 +10,8 @@ import * as Callouts from "@/components/Callouts"
 import {getAllArticles, getArticle, getRelated} from "@/lib/articles"
 import {formatArticleDate} from "@/lib/article-date"
 import {absoluteUrl, siteConfig} from "@/lib/site"
+import {getGamesForArticle} from "@/lib/games"
+import {GameVideo} from "@/components/GameVideo"
 
 export const dynamicParams = true
 
@@ -37,6 +39,7 @@ export default async function Page({params}: {params: Promise<{slug: string}>}) 
   const article = await getArticle(slug)
   if (!article) notFound()
   const related = await getRelated(article)
+  const linkedGames = getGamesForArticle(article.slug)
   const articleJson = {"@context": "https://schema.org", "@type": "NewsArticle", headline: article.title, description: article.seoDescription, datePublished: article.publishedAt, dateModified: article.updatedAt || article.publishedAt, mainEntityOfPage: absoluteUrl(`/articles/${article.slug}`), author: {"@type": "Person", name: article.author}, publisher: {"@type": "NewsMediaOrganization", name: siteConfig.name, logo: {"@type": "ImageObject", url: absoluteUrl(siteConfig.logos.compact)}}, ...(article.coverImage ? {image: article.coverImage.startsWith("http") ? article.coverImage : absoluteUrl(article.coverImage)} : {})}
   const crumbs = {"@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [{"@type": "ListItem", position: 1, name: "Home", item: siteConfig.url}, {"@type": "ListItem", position: 2, name: article.primaryDesk, item: absoluteUrl(`/${article.primaryDesk.toLowerCase()}`)}, {"@type": "ListItem", position: 3, name: article.title, item: absoluteUrl(`/articles/${article.slug}`)}]}
 
@@ -59,6 +62,7 @@ export default async function Page({params}: {params: Promise<{slug: string}>}) 
       <div className="article-layout">
         <div className="prose">
           {article.contentFormat === "sanity" ? <SanityBody value={article.body as unknown[]}/> : <MDXRemote source={article.body as string} components={Callouts}/>}
+          {linkedGames.map((game) => <section className="article-gameplay" key={game.slug}><h2>Gameplay</h2><GameVideo game={game} compact/></section>)}
           {article.sourceLinks.length > 0 && <section className="source-list"><h2>Sources and Further Reading</h2><ul>{article.sourceLinks.map((source) => <li key={source.url}><a href={source.url} rel="noopener noreferrer">{source.title}</a></li>)}</ul></section>}
           {article.disclosure && <section className="callout"><h2>Disclosure</h2><p>{article.disclosure}</p></section>}
         </div>

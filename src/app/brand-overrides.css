@@ -68,6 +68,43 @@
 .homepage-affiliates h2 { margin: 10px 0 12px; font-size: clamp(2rem, 4vw, 3.3rem); }
 .homepage-affiliates p { max-width: 760px; margin: 0; color: #475569; }
 
+/* Games library */
+.games-library, .game-page-section { padding-top: clamp(52px, 6vw, 76px); padding-bottom: clamp(52px, 6vw, 76px); }
+.games-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.game-card { border: 1px solid var(--line); background: #fff; }
+.game-card:hover { border-color: var(--blue); }
+.game-artwork { position: relative; aspect-ratio: 16 / 9; overflow: hidden; display: grid; place-items: end start; padding: 22px; background: linear-gradient(145deg, var(--navy) 0 68%, var(--blue) 68%); color: #fff; }
+.game-artwork img { object-fit: cover; }
+.game-artwork span { position: relative; z-index: 1; font-size: 1rem; font-weight: 900; letter-spacing: .08em; line-height: 1.25; text-transform: uppercase; }
+.game-card-details { padding: 22px; }
+.game-card h3 { margin: 8px 0 12px; font-size: 1.65rem; }
+.game-card p { margin: 0 0 8px; color: #475569; }
+.game-duration { color: var(--navy) !important; font-size: .85rem; font-weight: 800; }
+.game-card-links { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 20px; }
+.game-card-links .text-link::after { content: none; }
+.game-card-links .text-link + .text-link::before { content: "•"; margin-right: 18px; color: var(--muted); }
+.game-page-hero { padding: clamp(58px, 7vw, 92px) 0; border-bottom: 1px solid var(--line); background: var(--wash); }
+.game-page-hero-grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(320px, .9fr); align-items: center; gap: clamp(42px, 7vw, 90px); }
+.game-page-hero h1 { margin: 14px 0 22px; font-size: clamp(3.2rem, 6.5vw, 6.3rem); text-wrap: balance; }
+.game-page-hero p { max-width: 720px; margin: 0 0 18px; color: #334155; font-size: 1.18rem; }
+.game-video-frame { position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: var(--navy); }
+.game-video-frame iframe { width: 100%; height: 100%; position: absolute; inset: 0; border: 0; }
+.game-video-meta { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; padding: 16px 0 0; color: var(--muted); font-size: .88rem; font-weight: 700; }
+.game-thoughts { background: var(--navy); color: #d8e3f2; }
+.game-thoughts h2 { color: #fff; }
+.game-thoughts .eyebrow { color: #72a7ff; }
+.game-thoughts p { margin: 0; font-size: 1.1rem; }
+.game-studio-details { display: grid; grid-template-columns: repeat(3, 1fr); margin: 0; border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+.game-studio-details div { padding: 22px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.game-studio-details dt { margin-bottom: 7px; color: var(--muted); font-size: .78rem; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
+.game-studio-details dd { margin: 0; color: var(--navy); font-weight: 800; }
+.game-studio-details a { color: var(--blue); }
+.game-related-links { display: flex; flex-wrap: wrap; gap: 10px; }
+.game-related-links a { padding: 12px 16px; border: 1px solid var(--line); color: var(--navy); font-weight: 800; }
+.article-gameplay { margin: 2.5em 0; padding: 28px; border: 1px solid var(--line); background: var(--wash); }
+.article-gameplay h2 { margin: 0 0 20px; }
+.game-feature-cta p + p { margin-top: 12px; }
+
 @media (max-width: 900px) {
   .geeiq-benefits { grid-template-columns: 1fr 1fr; }
 }
@@ -163,6 +200,8 @@
   .agency-lead, .agency-proof-grid, .adult-origin, .adult-support, .studio-structure, .community-insight, .agency-pricing-preview { grid-template-columns: 1fr; }
   .agency-service-grid, .pricing-grid, .formats-grid { grid-template-columns: 1fr 1fr; }
   .affiliate-category-grid, .affiliate-work-grid { grid-template-columns: 1fr 1fr; }
+  .games-grid, .game-studio-details { grid-template-columns: 1fr 1fr; }
+  .game-page-hero-grid { grid-template-columns: 1fr; }
   .pricing-card > p { min-height: 0; }
   .audience-chip-grid { grid-template-columns: repeat(2, 1fr); }
 }
@@ -175,6 +214,8 @@
   .agency-service-grid, .pricing-grid, .formats-grid, .platform-grid, .platform-explainer, .audience-chip-grid, .service-price-callout, .about-service-links, .affiliate-category-grid, .affiliate-work-grid, .homepage-affiliates { grid-template-columns: 1fr; }
   .affiliate-category-card ul, .affiliate-relevance ul { columns: 1; }
   .homepage-affiliates { padding: 28px 22px; }
+  .games-grid, .game-studio-details { grid-template-columns: 1fr; }
+  .article-gameplay { padding: 22px; }
   .platform-grid article { border-right: 0; border-bottom: 1px solid var(--line); }
   .platform-grid article:last-child { border-bottom: 0; }
   .adult-support ul { columns: 1; }

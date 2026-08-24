@@ -5,6 +5,8 @@ import {getAllArticles} from "@/lib/articles"
 import {getPublicJobs} from "@/lib/jobs"
 import {siteConfig} from "@/lib/site"
 import {GeeiqReferral} from "@/components/GeeiqReferral"
+import {GameCard} from "@/components/GameCard"
+import {getAllGames} from "@/lib/games"
 
 export const metadata: Metadata = {
   title: {absolute: "The Bloxline | Roblox Community Building for Games, Studios and Brands"},
@@ -22,6 +24,7 @@ const services = [
 export default async function Home() {
   const articles = (await getAllArticles(false)).slice(0, 3)
   const jobs = (await getPublicJobs()).slice(0, 3)
+  const games = getAllGames().slice(0, 3)
   const communityEmail = `mailto:${siteConfig.commercialEmail}?subject=${encodeURIComponent("Roblox Community Enquiry")}`
   const generalEmail = `mailto:${siteConfig.commercialEmail}?subject=${encodeURIComponent("Bloxline Enquiry")}`
 
@@ -63,6 +66,8 @@ export default async function Home() {
       <p className="agency-section-copy">Alongside our commercial work, The Bloxline publishes guides, analysis and reporting that help adults understand Roblox and the businesses being built around it.</p>
       <div className="article-grid">{articles.map((article) => <ArticleCard key={article.slug} article={article}/>)}</div>
     </section>
+
+    <section className="section container recently-played"><div className="section-heading"><div><span className="eyebrow">The Bloxline Games</span><h2>Recently Played</h2></div><Link className="text-link" href="/games">Browse Games</Link></div>{games.length ? <div className="games-grid">{games.map((game) => <GameCard game={game} key={game.slug}/>)}</div> : <p className="agency-section-copy">Games personally played by The Bloxline are being added to the library.</p>}</section>
 
     <section className="section container agency-jobs">
       <div className="section-heading"><div><span className="eyebrow">Roblox Careers</span><h2>Jobs across the Roblox ecosystem</h2></div><Link className="text-link" href="/jobs">Explore Roblox Jobs</Link></div>
