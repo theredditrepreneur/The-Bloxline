@@ -26,8 +26,58 @@ export type Game = {
 }
 
 // Add personally played games here. Use images in /public/games where possible.
-// Do not add a game until its details and gameplay link are ready to publish.
-export const games: Game[] = []
+// Keep descriptions and studio details to information that has been checked.
+export const games: Game[] = [
+  {
+    title: "+1 Loot Evo",
+    slug: "plus-one-loot-evo",
+    youtubeUrl: "https://www.youtube.com/watch?v=XJQS1jgflHo",
+    gameplayDuration: "11 minutes",
+    relatedArticleSlugs: [],
+  },
+  {
+    title: "Surf and Plunge",
+    slug: "surf-and-plunge",
+    youtubeUrl: "https://www.youtube.com/watch?v=FGQPJLvRLZI",
+    gameplayDuration: "7 minutes",
+    relatedArticleSlugs: [],
+  },
+  {
+    title: "Plane Race with 99 Propellers",
+    slug: "plane-race-with-99-propellers",
+    youtubeUrl: "https://www.youtube.com/watch?v=SyDXWUFsHIo",
+    gameplayDuration: "20 minutes",
+    relatedArticleSlugs: [],
+  },
+  {
+    title: "South London Remastered",
+    slug: "south-london-remastered",
+    youtubeUrl: "https://www.youtube.com/watch?v=EpDKW3GyP4M",
+    gameplayDuration: "10 minutes",
+    relatedArticleSlugs: [],
+  },
+  {
+    title: "Eat To Grow",
+    slug: "eat-to-grow",
+    youtubeUrl: "https://www.youtube.com/watch?v=mwhRgfFqMr4",
+    gameplayDuration: "26 minutes",
+    relatedArticleSlugs: [],
+  },
+  {
+    title: "Blow Up and Fall!",
+    slug: "blow-up-and-fall",
+    youtubeUrl: "https://www.youtube.com/watch?v=-yF8aq8Xqsw",
+    gameplayDuration: "21 minutes",
+    relatedArticleSlugs: [],
+  },
+  {
+    title: "Island Defenders: Bandits and Bosses",
+    slug: "island-defenders-bandits-and-bosses",
+    youtubeUrl: "https://www.youtube.com/watch?v=QcURpJkFVYY",
+    gameplayDuration: "5 minutes",
+    relatedArticleSlugs: [],
+  },
+]
 
 export function getAllGames() { return games }
 export function getGame(slug: string) { return games.find((game) => game.slug === slug) }
