@@ -9,11 +9,11 @@ import {getAllGames, getGame, getRelatedGames} from "@/lib/games"
 import {absoluteUrl, siteConfig} from "@/lib/site"
 
 export const dynamicParams = true
-export function generateStaticParams() { return getAllGames().map((game) => ({slug: game.slug})) }
+export async function generateStaticParams() { return (await getAllGames()).map((game) => ({slug: game.slug})) }
 
 export async function generateMetadata({params}: {params: Promise<{slug: string}>}): Promise<Metadata> {
   const {slug} = await params
-  const game = getGame(slug)
+  const game = await getGame(slug)
   if (!game) return {}
   const description = game.description || `Gameplay, thoughts and studio information for ${game.title}, played by The Bloxline.`
   return {title: game.title, description, alternates: {canonical: `/games/${game.slug}`}, openGraph: {title: `${game.title} | The Bloxline Games`, description, url: `/games/${game.slug}`, type: "website", ...(game.coverImage ? {images: [{url: game.coverImage, alt: game.coverAlt || game.title}]} : {})}}
@@ -21,10 +21,10 @@ export async function generateMetadata({params}: {params: Promise<{slug: string}
 
 export default async function GamePage({params}: {params: Promise<{slug: string}>}) {
   const {slug} = await params
-  const game = getGame(slug)
+  const game = await getGame(slug)
   if (!game) notFound()
   const relatedArticles = (await getAllArticles(false)).filter((article) => game.relatedArticleSlugs.includes(article.slug))
-  const relatedGames = getRelatedGames(game)
+  const relatedGames = await getRelatedGames(game)
   const email = `mailto:${siteConfig.commercialEmail}?subject=${encodeURIComponent("Game Feature Enquiry")}`
   const studioLinks = game.studio?.social ? Object.entries(game.studio.social) : []
   const gameSchema = {"@context": "https://schema.org", "@type": "VideoGame", name: game.title, description: game.description, url: absoluteUrl(`/games/${game.slug}`), ...(game.genre ? {genre: game.genre} : {}), ...(game.releaseDate ? {datePublished: game.releaseDate} : {}), ...(game.studio?.developer ? {creator: {"@type": "Organization", name: game.studio.developer}} : {}), ...(game.coverImage ? {image: game.coverImage.startsWith("http") ? game.coverImage : absoluteUrl(game.coverImage)} : {})}

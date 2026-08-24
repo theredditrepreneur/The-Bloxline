@@ -27,7 +27,7 @@ export type Game = {
 
 // Add personally played games here. Use images in /public/games where possible.
 // Keep descriptions and studio details to information that has been checked.
-export const games: Game[] = [
+const localGames: Game[] = [
   {
     title: "+1 Loot Evo",
     slug: "plus-one-loot-evo",
@@ -79,10 +79,50 @@ export const games: Game[] = [
   },
 ]
 
-export function getAllGames() { return games }
-export function getGame(slug: string) { return games.find((game) => game.slug === slug) }
-export function getGamesForArticle(articleSlug: string) { return games.filter((game) => game.relatedArticleSlugs.includes(articleSlug)) }
-export function getRelatedGames(game: Game) { return games.filter((candidate) => candidate.slug !== game.slug && (game.relatedGameSlugs?.includes(candidate.slug) || candidate.studio?.profileSlug && candidate.studio.profileSlug === game.studio?.profileSlug)).slice(0, 3) }
+function mapSanityGame(document: Record<string, unknown>): Game | null {
+  const cover = document.coverImage as {alt?: string; asset?: {url?: string}} | undefined
+  const title = typeof document.title === "string" ? document.title : undefined
+  const slug = typeof document.slug === "string" && document.slug ? document.slug : title?.toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")
+  if (!title || !slug || typeof document.youtubeUrl !== "string" || !document.youtubeUrl) return null
+  const developer = typeof document.developer === "string" ? document.developer : undefined
+  const publisher = typeof document.publisher === "string" ? document.publisher : undefined
+  const website = typeof document.studioWebsite === "string" ? document.studioWebsite : undefined
+  const discord = typeof document.studioDiscord === "string" ? document.studioDiscord : undefined
+  return {
+    title,
+    slug,
+    description: typeof document.description === "string" ? document.description : undefined,
+    thoughts: typeof document.thoughts === "string" ? document.thoughts : undefined,
+    genre: typeof document.genre === "string" ? document.genre : undefined,
+    coverImage: cover?.asset?.url,
+    coverAlt: cover?.alt,
+    youtubeUrl: typeof document.youtubeUrl === "string" ? document.youtubeUrl : undefined,
+    gameplayDuration: typeof document.gameplayDuration === "string" ? document.gameplayDuration : undefined,
+    gameplayUploadedAt: typeof document.gameplayUploadedAt === "string" ? document.gameplayUploadedAt : undefined,
+    studio: developer || publisher || website || discord ? {developer, publisher, website, discord} : undefined,
+    releaseStatus: typeof document.releaseStatus === "string" ? document.releaseStatus : undefined,
+    releaseDate: typeof document.releaseDate === "string" ? document.releaseDate : undefined,
+    relatedArticleSlugs: Array.isArray(document.relatedArticleSlugs) ? document.relatedArticleSlugs.filter((value): value is string => typeof value === "string") : [],
+    relatedGameSlugs: Array.isArray(document.relatedGameSlugs) ? document.relatedGameSlugs.filter((value): value is string => typeof value === "string") : [],
+  }
+}
+
+export async function getAllGames(): Promise<Game[]> {
+  try {
+    const result = await sanityFetch({query: allGamesQuery, perspective: "published", stega: false})
+    const studioGames = (result.data as Record<string, unknown>[]).map(mapSanityGame).filter((game): game is Game => game !== null)
+    const gamesBySlug = new Map(localGames.map((game) => [game.slug, game]))
+    studioGames.forEach((game) => gamesBySlug.set(game.slug, game))
+    return [...studioGames, ...localGames.filter((game) => !studioGames.some((studioGame) => studioGame.slug === game.slug))]
+  } catch (error) {
+    console.error("Unable to load Games from Sanity. Using local games.", error)
+    return localGames
+  }
+}
+
+export async function getGame(slug: string) { return (await getAllGames()).find((game) => game.slug === slug) }
+export async function getGamesForArticle(articleSlug: string) { return (await getAllGames()).filter((game) => game.relatedArticleSlugs.includes(articleSlug)) }
+export async function getRelatedGames(game: Game) { return (await getAllGames()).filter((candidate) => candidate.slug !== game.slug && (game.relatedGameSlugs?.includes(candidate.slug) || candidate.studio?.profileSlug && candidate.studio.profileSlug === game.studio?.profileSlug)).slice(0, 3) }
 
 export function getYouTubeEmbedUrl(url?: string) {
   if (!url) return undefined
@@ -94,3 +134,5 @@ export function getYouTubeEmbedUrl(url?: string) {
     return undefined
   }
 }
+import {sanityFetch} from "@/sanity/live"
+import {allGamesQuery} from "@/sanity/queries"

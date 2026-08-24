@@ -141,3 +141,27 @@ export const jobsPageSettingsQuery = defineQuery(/* groq */ `
     }
   }
 `)
+
+export const allGamesQuery = defineQuery(/* groq */ `
+  *[_type == "game" && status == "published"]
+  | order(_createdAt desc){
+    _id,
+    title,
+    "slug": slug.current,
+    description,
+    thoughts,
+    genre,
+    coverImage{alt, crop, hotspot, asset->{_id, url, metadata{lqip, dimensions{width, height}}}},
+    youtubeUrl,
+    gameplayDuration,
+    gameplayUploadedAt,
+    developer,
+    publisher,
+    studioWebsite,
+    studioDiscord,
+    releaseStatus,
+    releaseDate,
+    "relatedArticleSlugs": relatedArticles[]->slug.current,
+    "relatedGameSlugs": relatedGames[]->slug.current
+  }
+`)

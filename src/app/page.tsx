@@ -24,7 +24,7 @@ const services = [
 export default async function Home() {
   const articles = (await getAllArticles(false)).slice(0, 3)
   const jobs = (await getPublicJobs()).slice(0, 3)
-  const games = getAllGames().slice(0, 3)
+  const games = (await getAllGames()).slice(0, 3)
   const communityEmail = `mailto:${siteConfig.commercialEmail}?subject=${encodeURIComponent("Roblox Community Enquiry")}`
   const generalEmail = `mailto:${siteConfig.commercialEmail}?subject=${encodeURIComponent("Bloxline Enquiry")}`
 

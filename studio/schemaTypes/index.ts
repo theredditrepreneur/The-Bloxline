@@ -5,5 +5,6 @@ import {siteSettingsType} from "./siteSettingsType"
 import {startHereType} from "./startHereType"
 import {jobType} from "./jobType"
 import {jobsPageSettingsType} from "./jobsPageSettingsType"
+import {gameType} from "./gameType"
 
-export const schemaTypes = [authorType, editorialCalloutType, articleType, jobType, jobsPageSettingsType, siteSettingsType, startHereType]
+export const schemaTypes = [authorType, editorialCalloutType, articleType, jobType, gameType, jobsPageSettingsType, siteSettingsType, startHereType]

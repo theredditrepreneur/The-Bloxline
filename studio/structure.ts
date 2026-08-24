@@ -12,5 +12,6 @@ export const structure: StructureResolver = (S) => S.list().title("The Bloxline"
   S.divider(),
   S.documentTypeListItem("article").title("Articles").icon(DocumentTextIcon),
   S.documentTypeListItem("job").title("Jobs").icon(CaseIcon),
+  S.documentTypeListItem("game").title("Games").icon(PlayIcon),
   S.documentTypeListItem("author").title("Authors").icon(UserIcon),
 ])

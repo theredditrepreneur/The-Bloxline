@@ -10,6 +10,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }))
   const articles = (await getAllArticles(false)).map((article) => ({url: absoluteUrl(`/articles/${article.slug}`), lastModified: new Date(article.updatedAt || article.publishedAt), changeFrequency: "monthly" as const, priority: 0.8}))
   const jobs = (await getPublicJobs()).map((job) => ({url: absoluteUrl(`/jobs/${job.slug}`), lastModified: new Date(job.verifiedAt || job.dateDiscovered), changeFrequency: "weekly" as const, priority: 0.7}))
-  const games = getAllGames().map((game) => ({url: absoluteUrl(`/games/${game.slug}`), lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.7}))
+  const games = (await getAllGames()).map((game) => ({url: absoluteUrl(`/games/${game.slug}`), lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.7}))
   return [...routes, ...articles, ...jobs, ...games]
 }
