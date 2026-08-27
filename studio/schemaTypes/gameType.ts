@@ -21,6 +21,7 @@ export const gameType = defineType({
     defineField({name: "genre", title: "Genre", type: "string", group: "details"}),
     defineField({name: "coverImage", title: "Cover image", type: "image", group: "gameplay", options: {hotspot: true}, fields: [defineField({name: "alt", title: "Alternative text", type: "string", validation: (rule) => rule.required().warning("Alternative text is important for readers and search engines")})]}),
     defineField({name: "youtubeUrl", title: "YouTube gameplay link", type: "url", group: "gameplay", description: "Required. Paste the full YouTube gameplay link.", validation: (rule) => rule.required().uri({scheme: ["https"]})}),
+    defineField({name: "robloxGameUrl", title: "Official Roblox game link", type: "url", group: "gameplay", description: "Optional. Paste the full Roblox experience link, for example https://www.roblox.com/games/...", validation: (rule) => rule.uri({scheme: ["https"]})}),
     defineField({name: "gameplayDuration", title: "Gameplay duration", type: "string", group: "gameplay", description: "For example, 12 minutes."}),
     defineField({name: "gameplayUploadedAt", title: "Gameplay uploaded date", type: "date", group: "gameplay"}),
     defineField({name: "developer", title: "Developer or studio", type: "string", group: "studio"}),

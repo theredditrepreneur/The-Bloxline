@@ -87,6 +87,7 @@
 .game-page-hero-grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(320px, .9fr); align-items: center; gap: clamp(42px, 7vw, 90px); }
 .game-page-hero h1 { margin: 14px 0 22px; font-size: clamp(3.2rem, 6.5vw, 6.3rem); text-wrap: balance; }
 .game-page-hero p { max-width: 720px; margin: 0 0 18px; color: #334155; font-size: 1.18rem; }
+.game-page-hero .game-roblox-link { margin: 22px 0 0; }
 .game-video { max-width: 820px; }
 .game-video-frame { position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: var(--navy); }
 .game-video-compact { max-width: 680px; }

@@ -153,6 +153,7 @@ export const allGamesQuery = defineQuery(/* groq */ `
     genre,
     coverImage{alt, crop, hotspot, asset->{_id, url, metadata{lqip, dimensions{width, height}}}},
     youtubeUrl,
+    robloxGameUrl,
     gameplayDuration,
     gameplayUploadedAt,
     developer,

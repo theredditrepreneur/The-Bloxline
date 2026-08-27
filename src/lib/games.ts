@@ -16,6 +16,7 @@ export type Game = {
   coverImage?: string
   coverAlt?: string
   youtubeUrl?: string
+  robloxGameUrl?: string
   gameplayDuration?: string
   gameplayUploadedAt?: string
   studio?: GameStudio
@@ -97,6 +98,7 @@ function mapSanityGame(document: Record<string, unknown>): Game | null {
     coverImage: cover?.asset?.url,
     coverAlt: cover?.alt,
     youtubeUrl: typeof document.youtubeUrl === "string" ? document.youtubeUrl : undefined,
+    robloxGameUrl: typeof document.robloxGameUrl === "string" ? document.robloxGameUrl : undefined,
     gameplayDuration: typeof document.gameplayDuration === "string" ? document.gameplayDuration : undefined,
     gameplayUploadedAt: typeof document.gameplayUploadedAt === "string" ? document.gameplayUploadedAt : undefined,
     studio: developer || publisher || website || discord ? {developer, publisher, website, discord} : undefined,
