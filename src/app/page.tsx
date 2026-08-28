@@ -1,4 +1,5 @@
 import type {Metadata} from "next"
+import Image from "next/image"
 import Link from "next/link"
 import {ArticleCard} from "@/components/ArticleCard"
 import {getAllArticles} from "@/lib/articles"
@@ -57,7 +58,7 @@ export default async function Home() {
       <div className="container agency-proof-grid"><div><span className="eyebrow">Built around Roblox</span><h2>Specialist knowledge makes the community work stronger.</h2></div><div><p>The Bloxline works exclusively around the Roblox ecosystem.</p><p>Our understanding comes from covering Roblox games, studios, developers, careers, business models, communities and the way the platform is changing.</p><p>This specialist focus allows us to approach community building with an understanding of the environment the game actually exists within.</p></div></div>
     </section>
 
-    <section className="agency-current container"><span className="eyebrow">Current Community Work</span><h2>Building stronger community infrastructure around Roblox games.</h2><p>The Bloxline is currently in discussions with Roblox studios and developers about building stronger community infrastructure around their games, including the relationship between Reddit, Discord and existing Roblox audiences.</p></section>
+    <section className="homepage-client-work container"><div className="homepage-client-identity"><Image src="/clients/mma-rise-to-champion.jpg" alt="MMA Rise to Champion" width={400} height={400}/></div><div><span className="eyebrow">Current Client Work</span><h2>Supporting MMA Fighters with its Reddit community launch</h2><p>The Bloxline is working with MMA Fighters on subreddit setup, Reddit content strategy and launch support for its growing game community.</p><Link className="text-link" href="/services/community-building">Explore our community services</Link></div></section>
 
     <GeeiqReferral featured/>
 

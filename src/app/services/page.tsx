@@ -1,4 +1,5 @@
 import type {Metadata} from "next"
+import Image from "next/image"
 import Link from "next/link"
 import {siteConfig} from "@/lib/site"
 
@@ -17,9 +18,11 @@ const services = [
 
 export default function ServicesPage() {
   const email = `mailto:${siteConfig.commercialEmail}?subject=${encodeURIComponent("Bloxline Enquiry")}`
+  const communityEmail = `mailto:${siteConfig.commercialEmail}?subject=${encodeURIComponent("Roblox Community Enquiry")}`
   return <>
-    <header className="service-page-hero"><div className="container"><span className="eyebrow">Roblox Services</span><h1>Commercial support for Roblox games, studios and brands.</h1><p>The Bloxline helps Roblox companies build stronger communities, understand their audiences and communicate with people beyond the game.</p><a className="button" href={email}>Talk To Us</a></div></header>
+    <header className="service-page-hero"><div className="container"><span className="eyebrow">Roblox Services</span><h1>Commercial support for Roblox games, studios and brands.</h1><p>The Bloxline helps Roblox studios build stronger public communities around their games through Reddit strategy, community infrastructure and player focused editorial thinking.</p><a className="button" href={email}>Talk To Us</a></div></header>
     <section className="service-directory container"><div className="agency-service-grid">{services.map((service) => <article className="agency-service-card" key={service.title}><h2>{service.title}</h2><p>{service.copy}</p><p className="service-detail"><strong>{service.details}</strong></p><Link className="text-link" href={service.href}>{service.cta}</Link></article>)}</div></section>
+    <section className="client-work container"><div className="section-heading"><div><span className="eyebrow">Client Work</span><h2>Current community launch</h2></div></div><article className="client-work-card"><div className="client-work-identity"><Image src="/clients/mma-rise-to-champion.jpg" alt="MMA Rise to Champion" width={400} height={400}/></div><div><span className="eyebrow">Reddit Community Launch</span><h3>MMA Fighters / MMA Rise to Champion</h3><p>The Bloxline is working with the team behind MMA Fighters and MMA Rise to Champion on the launch of its Reddit community.</p><p>Our work includes subreddit setup, Reddit content strategy and launch support, helping the studio establish a public community space that can sit alongside its existing channels and grow with its games.</p><div className="client-work-links"><a className="text-link" href="https://discord.gg/champsavenue" target="_blank" rel="noopener noreferrer">Join the game community on Discord</a><a className="text-link" href={communityEmail}>Building a Roblox game? Let&apos;s build the community around it.</a></div></div></article></section>
     <section className="agency-proof"><div className="container agency-proof-grid"><div><span className="eyebrow">Why The Bloxline</span><h2>Roblox is the specialism.</h2></div><div><p>The Bloxline is not a general marketing or advertising agency.</p><p>Our work is built around Roblox games, their communities and the adults, brands and businesses trying to understand the platform.</p><p>That focused knowledge shapes every community structure, content recommendation and audience conversation.</p></div></div></section>
   </>
 }
