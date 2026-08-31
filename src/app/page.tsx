@@ -8,6 +8,7 @@ import {siteConfig} from "@/lib/site"
 import {GeeiqReferral} from "@/components/GeeiqReferral"
 import {GameCard} from "@/components/GameCard"
 import {getAllGames} from "@/lib/games"
+import {BrowserFrame} from "@/components/BrowserFrame"
 
 export const metadata: Metadata = {
   title: {absolute: "The Bloxline | Roblox Community Building for Games, Studios and Brands"},
@@ -58,7 +59,7 @@ export default async function Home() {
       <div className="container agency-proof-grid"><div><span className="eyebrow">Built around Roblox</span><h2>Specialist knowledge makes the community work stronger.</h2></div><div><p>The Bloxline works exclusively around the Roblox ecosystem.</p><p>Our understanding comes from covering Roblox games, studios, developers, careers, business models, communities and the way the platform is changing.</p><p>This specialist focus allows us to approach community building with an understanding of the environment the game actually exists within.</p></div></div>
     </section>
 
-    <section className="homepage-client-work container"><div className="homepage-client-identity"><Image src="/clients/mma-rise-to-champion.jpg" alt="MMA Rise to Champion" width={400} height={400}/></div><div><span className="eyebrow">Current Client Work</span><h2>Supporting MMA Rise to Champion with its Reddit community launch</h2><p>The Bloxline is working with MMA Rise to Champion on subreddit setup, Reddit content strategy and launch support for its growing game community.</p><Link className="text-link" href="/services/community-building">Explore our community services</Link></div></section>
+    <section className="homepage-client-work container"><div className="homepage-client-copy"><Image className="homepage-client-logo" src="/clients/mma-rise-to-champion-logo.png" alt="MMA Rise To Champion" width={1254} height={1254}/><span className="eyebrow">Current Client Work</span><h2>MMA Rise To Champion</h2><p className="homepage-client-subhead">Building a Roblox community from the ground up.</p><p>The Bloxline is building and managing the Reddit community for MMA Rise To Champion, supporting the experience through beta launch and beyond with community strategy, player discussion, content, feedback systems and developer participation.</p><Link className="text-link" href="/work/mma-rise-to-champion">View The Work</Link></div><BrowserFrame src="/work/mma-rise-to-champion/subreddit-launch.png" alt="The MMA Rise To Champion subreddit showing its beta launch discussion and community information"/></section>
 
     <GeeiqReferral featured/>
 
