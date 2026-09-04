@@ -147,7 +147,7 @@ Create a Sanity GROQ webhook with these settings:
 - URL: `https://www.thebloxline.com/api/revalidate`
 - Dataset: `production`
 - Trigger on: create, update and delete
-- Filter: `_type in ["article", "job", "jobsPageSettings", "siteSettings", "author"]`
+- Filter: `_type in ["article", "job", "game", "jobsPageSettings", "siteSettings", "author"]`
 - Projection: `{_type, "slug": slug.current}`
 - Secret: the same private value stored as `SANITY_REVALIDATE_SECRET` in Vercel
 

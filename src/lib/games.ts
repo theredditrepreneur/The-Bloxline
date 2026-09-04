@@ -1,3 +1,6 @@
+import {sanityClient} from "@/sanity/client"
+import {allGamesQuery} from "@/sanity/queries"
+
 export type GameStudio = {
   developer?: string
   publisher?: string
@@ -111,8 +114,10 @@ function mapSanityGame(document: Record<string, unknown>): Game | null {
 
 export async function getAllGames(): Promise<Game[]> {
   try {
-    const result = await sanityFetch({query: allGamesQuery, perspective: "published", stega: false})
-    const studioGames = (result.data as Record<string, unknown>[]).map(mapSanityGame).filter((game): game is Game => game !== null)
+    // Games should appear promptly after publishing. The direct API avoids the
+    // extra propagation delay of the Sanity CDN while a short cache keeps pages fast.
+    const documents = await sanityClient.withConfig({useCdn: false}).fetch<unknown[]>(allGamesQuery, {}, {next: {revalidate: 30, tags: ["games"]}})
+    const studioGames = documents.map((document) => mapSanityGame(document as Record<string, unknown>)).filter((game): game is Game => game !== null)
     const gamesBySlug = new Map(localGames.map((game) => [game.slug, game]))
     studioGames.forEach((game) => gamesBySlug.set(game.slug, game))
     return [...studioGames, ...localGames.filter((game) => !studioGames.some((studioGame) => studioGame.slug === game.slug))]
@@ -136,5 +141,3 @@ export function getYouTubeEmbedUrl(url?: string) {
     return undefined
   }
 }
-import {sanityFetch} from "@/sanity/live"
-import {allGamesQuery} from "@/sanity/queries"

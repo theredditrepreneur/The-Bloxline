@@ -1,4 +1,4 @@
-import {revalidatePath} from "next/cache"
+import {revalidatePath, revalidateTag} from "next/cache"
 import {NextResponse, type NextRequest} from "next/server"
 import {parseBody} from "next-sanity/webhook"
 
@@ -17,6 +17,12 @@ export async function POST(request: NextRequest) {
     revalidatePath("/search")
     revalidatePath("/sitemap.xml")
     revalidatePath("/rss.xml")
+
+    if (body?._type === "game") {
+      revalidateTag("games", {expire: 0})
+      revalidatePath("/games")
+      if (body.slug) revalidatePath(`/games/${body.slug}`)
+    }
 
     if (body?._type === "article") {
       for (const path of ["/parents", "/industry", "/games", "/studios", "/education"]) revalidatePath(path)
