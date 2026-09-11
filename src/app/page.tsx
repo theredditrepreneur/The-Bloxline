@@ -18,41 +18,40 @@ export const metadata: Metadata = {
 }
 
 const services = [
-  {title: "Roblox Community Building", copy: "For games and studios that want to turn players into an active community outside Roblox.", items: ["Reddit community strategy", "Subreddit creation and structure", "Rules and moderation setup", "Launch content", "Recurring community formats", "Player feedback systems", "Community management", "Community insight and reporting"], href: "/services/community-building", cta: "View Community Building"},
-  {title: "Community Management", copy: "For studios that already have a community but need ongoing support keeping activity useful and collecting player feedback.", items: ["Regular community content", "Update discussion threads", "Player engagement", "Moderation oversight", "Feedback collection", "Community reporting", "Recommendations"], href: "/services/community-building#pricing", cta: "View Ongoing Management"},
-  {title: "Roblox Audience And Adult Strategy", copy: "For studios, brands and businesses that need to explain Roblox clearly to people outside the traditional player audience.", items: ["Adult audience positioning", "Messaging reviews", "Roblox education for non player audiences", "Brand and studio communication strategy", "Content concepts", "Audience insight", "Industry context"], href: "/services/adult-audience", cta: "Talk To The Bloxline"},
+  {title: "Bloxline Playtest", copy: "See your Roblox game through a player’s eyes. Independent recorded playtesting and structured feedback covering onboarding, gameplay, progression, friction and the overall player experience.", items: ["Recorded gameplay", "Independent first impression", "Think aloud observations", "Clear feedback report", "Bloxline Top 5 priorities"], href: "/services/playtest", cta: "Explore Playtest", price: "Starting from £79"},
+  {title: "Roblox Community Building", copy: "For games and studios that want to turn players into an active community outside Roblox.", items: ["Reddit community strategy", "Subreddit creation and structure", "Rules and moderation setup", "Launch content", "Recurring community formats", "Player feedback systems", "Community management", "Community insight and reporting"], href: "/services/community-building", cta: "Explore Community Building", price: "Community launches from £495"},
 ]
 
 export default async function Home() {
   const articles = (await getAllArticles(false)).slice(0, 3)
   const jobs = (await getPublicJobs()).slice(0, 3)
   const games = (await getAllGames()).slice(0, 3)
-  const communityEmail = `mailto:${siteConfig.commercialEmail}?subject=${encodeURIComponent("Roblox Community Enquiry")}`
+  const playtestEmail = `mailto:${siteConfig.commercialEmail}?subject=${encodeURIComponent("Bloxline Playtest Enquiry")}`
   const generalEmail = `mailto:${siteConfig.commercialEmail}?subject=${encodeURIComponent("Bloxline Enquiry")}`
 
   return <>
     <header className="agency-hero">
       <div className="container agency-hero-inner">
-        <span className="eyebrow">Roblox Community And Audience Services</span>
-        <h1>Build a stronger community around your Roblox game.</h1>
-        <p>The Bloxline helps Roblox developers, studios and brands build communities beyond the experience, understand their audiences and create stronger relationships with the people around their games.</p>
-        <div className="agency-actions"><Link className="button" href="#services">Explore Services</Link><a className="button button-secondary" href={communityEmail}>Talk About Your Game</a></div>
-        <small>Community building, audience insight and adult facing Roblox strategy.</small>
+        <span className="eyebrow">Roblox Playtest And Community Services</span>
+        <h1>Playtest the game. Build the community.</h1>
+        <p>The Bloxline helps Roblox developers and studios see their games through a player’s eyes, then build stronger relationships with the people around them.</p>
+        <div className="agency-actions"><Link className="button" href="#services">Explore Services</Link><a className="button button-secondary" href={playtestEmail}>Talk About Your Game</a></div>
+        <small>Independent player feedback and community building for Roblox studios.</small>
       </div>
     </header>
 
     <section className="agency-lead container">
-      <div><span className="eyebrow">Community beyond the experience</span><h2>Roblox brings the players. We help build the community.</h2></div>
-      <div><p>A successful Roblox experience can attract thousands or millions of players without ever developing a strong community outside the game.</p><p>The Bloxline helps studios create places where players can continue the conversation, share feedback, discuss updates, create content and build stronger relationships with the people behind the game.</p><p>Our community work begins with Reddit, where persistent discussions, searchable content and player led conversations can complement platforms such as Discord rather than replace them.</p><Link className="text-link" href="/services/community-building">Explore Community Building</Link></div>
+      <div><span className="eyebrow">Start with the player</span><h2>A fresh perspective can reveal what a team no longer sees.</h2></div>
+      <div><p>When you know a Roblox game inside out, it can be hard to experience it like somebody playing for the first time. Bloxline Playtest records that first experience and turns it into practical player feedback.</p><p>Then, once players are in the game, we can help build a community where they can continue the conversation, share feedback and stay connected to your studio.</p><Link className="text-link" href="/services/playtest">Explore Bloxline Playtest</Link></div>
     </section>
 
     <section className="agency-services" id="services">
-      <div className="container"><div className="agency-section-head"><span className="eyebrow">What we do</span><h2>Services for Roblox studios and brands</h2></div><div className="agency-service-grid">{services.map((service) => <article className="agency-service-card" key={service.title}><h3>{service.title}</h3><p>{service.copy}</p><ul>{service.items.map((item) => <li key={item}>{item}</li>)}</ul><Link className="text-link" href={service.href}>{service.cta}</Link></article>)}</div></div>
+      <div className="container"><div className="agency-section-head"><span className="eyebrow">What we do</span><h2>Two primary services for Roblox studios</h2></div><div className="agency-service-grid agency-service-grid-primary">{services.map((service) => <article className="agency-service-card" key={service.title}><h3>{service.title}</h3><p>{service.copy}</p><ul>{service.items.map((item) => <li key={item}>{item}</li>)}</ul><p className="service-detail"><strong>{service.price}</strong></p><Link className="text-link" href={service.href}>{service.cta}</Link></article>)}</div></div>
     </section>
 
     <section className="agency-pricing-preview container">
-      <div><span className="eyebrow">Clear starting prices</span><h2>Community services built around your game.</h2><p>Launch a new Reddit community, rebuild an existing one or ask The Bloxline to stay involved with ongoing management.</p></div>
-      <div className="agency-price-list"><Link href="/services/community-building#pricing"><span>Community Launch</span><strong>£495 one time</strong></Link><Link href="/services/community-building#pricing"><span>Community Management</span><strong>From £395 per month</strong></Link><Link href="/services/community-building#pricing"><span>Community Management Plus</span><strong>From £695 per month</strong></Link></div>
+      <div><span className="eyebrow">Clear starting prices</span><h2>Practical support for the game and its community.</h2><p>Get an independent player perspective before launch or an update. Then build a lasting community around the experience.</p></div>
+      <div className="agency-price-list"><Link href="/services/playtest#pricing"><span>Bloxline Playtest</span><strong>From £79</strong></Link><Link href="/services/community-building#pricing"><span>Community Launch</span><strong>£495 one time</strong></Link><Link href="/services/community-building#pricing"><span>Community Management</span><strong>From £395 per month</strong></Link></div>
     </section>
 
     <section className="agency-proof">

@@ -5,7 +5,7 @@ import {getPublicJobs} from "@/lib/jobs"
 import {getAllGames} from "@/lib/games"
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const routes = ["", "/services", "/services/community-building", "/services/adult-audience", "/work/mma-rise-to-champion", "/developer-network", "/affiliates", "/latest", "/parents", "/industry", "/games", "/studios", "/education", "/start-here", "/about", "/contact", "/search", "/jobs", "/privacy", "/terms"].map((route) => ({
+  const routes = ["", "/services", "/services/playtest", "/services/community-building", "/services/adult-audience", "/work/mma-rise-to-champion", "/developer-network", "/affiliates", "/latest", "/parents", "/industry", "/games", "/studios", "/education", "/start-here", "/about", "/contact", "/search", "/jobs", "/privacy", "/terms"].map((route) => ({
     url: absoluteUrl(route || "/"), lastModified: new Date(), changeFrequency: route === "" ? "daily" as const : "weekly" as const, priority: route === "" ? 1 : 0.7,
   }))
   const articles = (await getAllArticles(false)).map((article) => ({url: absoluteUrl(`/articles/${article.slug}`), lastModified: new Date(article.updatedAt || article.publishedAt), changeFrequency: "monthly" as const, priority: 0.8}))

@@ -98,6 +98,73 @@
 .game-thoughts .eyebrow { color: #72a7ff; }
 .game-thoughts p { margin: 0; font-size: 1.1rem; }
 .game-thoughts p + p { margin-top: 1.1em; }
+.game-playtest-cta { background: var(--wash); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: clamp(42px, 5vw, 64px) 0; }
+.game-playtest-cta h2 { margin: 8px 0 14px; font-size: clamp(2rem, 4vw, 3.3rem); }
+.game-playtest-cta p { max-width: 680px; margin: 0 0 24px; font-size: 1.08rem; }
+
+/* Bloxline Playtest */
+.agency-service-grid-primary { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.service-supporting-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; margin-top: 28px; }
+.playtest-hero { background: var(--wash); }
+.playtest-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 18px; margin-top: 24px; }
+.playtest-actions .text-link { color: var(--blue); }
+.playtest-qa { background: var(--navy); color: #d8e3f2; padding: clamp(48px, 6vw, 76px) 0; }
+.playtest-qa h2, .playtest-qa h3 { color: #fff; }
+.playtest-qa .eyebrow { color: #72a7ff; }
+.playtest-compare { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
+.playtest-compare article { border: 1px solid #ffffff3d; padding: 30px; }
+.playtest-compare h3 { margin: 0 0 18px; font-size: 1.55rem; }
+.playtest-compare ul, .playtest-report-grid ul, .pricing-card ul { margin: 0; padding-left: 1.3em; list-style: disc outside; }
+.playtest-compare li, .playtest-report-grid li, .pricing-card li { margin: 8px 0; }
+.playtest-recording { background: #edf4ff; padding: clamp(54px, 7vw, 88px) 0; }
+.playtest-recording-grid { display: grid; grid-template-columns: minmax(0, .9fr) minmax(360px, 1.1fr); gap: clamp(38px, 6vw, 76px); }
+.playtest-recording h2 { margin: 10px 0; font-size: clamp(2.3rem, 4vw, 3.7rem); }
+.playtest-recording p { font-size: 1.08rem; }
+.playtest-recording blockquote { border-left: 4px solid var(--blue); color: var(--navy); font-size: clamp(1.65rem, 3vw, 2.6rem); font-weight: 800; line-height: 1.15; margin: 28px 0 14px; padding-left: 22px; }
+.playtest-report-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(340px, .85fr); gap: 32px; align-items: start; }
+.playtest-report-grid > ul { columns: 2; border: 1px solid var(--line); padding: 28px 28px 22px 48px; }
+.playtest-report-grid aside { border-left: 5px solid var(--blue); background: var(--wash); padding: 28px; }
+.playtest-report-grid h3 { font-size: 1.55rem; margin: 16px 0 8px; }
+.playtest-report-grid p { margin: 0 0 18px; }
+.playtest-note { color: var(--muted); font-size: .92rem; }
+.playtest-pricing { background: var(--wash); }
+.playtest-pricing-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; align-items: stretch; }
+.playtest-pricing .pricing-card { display: flex; flex-direction: column; }
+.playtest-pricing .pricing-card .button { margin-top: auto; }
+.playtest-pricing .pricing-card h3 { font-size: clamp(2.2rem, 4vw, 3.5rem); }
+.pricing-card-featured { border-top: 5px solid var(--blue); }
+.pricing-card-featured .badge { align-self: flex-start; margin-bottom: 18px; }
+.playtest-panel { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 32px; border-top: 1px solid var(--line); margin-top: 32px; padding-top: 28px; }
+.playtest-panel h3 { margin: 0 0 7px; font-size: 1.4rem; }
+.playtest-panel p { margin: 0; }
+.playtest-stage-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); border-top: 2px solid var(--navy); }
+.playtest-stage-grid article { border-right: 1px solid var(--line); padding: 24px 20px 0 0; margin-right: 20px; }
+.playtest-stage-grid article:last-child { border-right: 0; }
+.playtest-stage-grid h3 { font-size: 1.35rem; margin: 0 0 12px; }
+.playtest-stage-grid p { color: #475569; margin: 0; }
+.playtest-stage-grid + .playtest-note { margin: 30px 0 0; max-width: 760px; }
+.playtest-submit { background: #edf4ff; padding: clamp(48px, 6vw, 72px) 0; }
+.playtest-submit .container { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 42px; }
+.playtest-submit h2 { margin: 10px 0 14px; font-size: clamp(2.25rem, 4vw, 3.5rem); }
+.playtest-submit p { margin: 0 0 12px; max-width: 760px; font-size: 1.08rem; }
+.playtest-submit-note { color: #475569; font-size: .95rem !important; }
+
+@media (max-width: 900px) {
+  .agency-service-grid-primary, .service-supporting-grid, .playtest-compare, .playtest-pricing-grid, .playtest-recording-grid, .playtest-report-grid { grid-template-columns: 1fr; }
+  .playtest-stage-grid { grid-template-columns: 1fr 1fr; gap: 0 28px; }
+  .playtest-stage-grid article { border-bottom: 1px solid var(--line); border-right: 0; margin-right: 0; padding: 24px 0; }
+  .playtest-submit .container { grid-template-columns: 1fr; }
+  .playtest-submit .button { justify-self: start; }
+}
+
+@media (max-width: 600px) {
+  .playtest-compare article, .playtest-report-grid aside, .playtest-report-grid > ul { padding: 22px; }
+  .playtest-report-grid > ul { columns: 1; padding-left: 40px; }
+  .playtest-pricing-grid { gap: 18px; }
+  .playtest-panel { grid-template-columns: 1fr; gap: 14px; }
+  .playtest-stage-grid { grid-template-columns: 1fr; }
+  .playtest-actions { align-items: flex-start; flex-direction: column; gap: 14px; }
+}
 .game-studio-details { display: grid; grid-template-columns: repeat(3, 1fr); margin: 0; border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
 .game-studio-details div { padding: 22px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 .game-studio-details dt { margin-bottom: 7px; color: var(--muted); font-size: .78rem; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
