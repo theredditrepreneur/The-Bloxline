@@ -1287,3 +1287,34 @@
     max-width: 1080px;
   }
 }
+
+/* Full horizontal header mark supplied for The Bloxline. */
+.topbar > a {
+  width: 250px;
+  height: 68px;
+  flex-basis: 250px;
+  overflow: visible;
+}
+
+.topbar > a img {
+  position: static;
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+@media (max-width: 600px) {
+  .topbar > a {
+    width: 165px;
+    height: 48px;
+    flex-basis: 165px;
+  }
+
+  .topbar > a img {
+    position: static;
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+  }
+}

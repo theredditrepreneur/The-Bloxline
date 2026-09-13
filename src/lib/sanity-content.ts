@@ -68,7 +68,7 @@ export async function getSiteSettings(): Promise<SiteSettings> {
       disclaimer: settings.disclaimer || siteConfig.disclaimer,
       logos: {
         horizontal: settings.footerLogo || siteConfig.logos.horizontal,
-        compact: settings.headerLogo || siteConfig.logos.compact,
+        compact: "/brand/bloxline-header-logo.jpg",
         favicon: settings.favicon || siteConfig.logos.favicon,
       },
       defaultSocialImage: settings.socialImage || undefined,
