@@ -6,5 +6,6 @@ import {startHereType} from "./startHereType"
 import {jobType} from "./jobType"
 import {jobsPageSettingsType} from "./jobsPageSettingsType"
 import {gameType} from "./gameType"
+import {youtubeVideoType} from "./youtubeVideoType"
 
-export const schemaTypes = [authorType, editorialCalloutType, articleType, jobType, gameType, jobsPageSettingsType, siteSettingsType, startHereType]
+export const schemaTypes = [authorType, editorialCalloutType, youtubeVideoType, articleType, jobType, gameType, jobsPageSettingsType, siteSettingsType, startHereType]

@@ -24,6 +24,7 @@ export const articleType = defineType({
       of: [
         defineArrayMember({type: "block", styles: [{title: "Normal", value: "normal"}, {title: "Heading 2", value: "h2"}, {title: "Heading 3", value: "h3"}, {title: "Quote", value: "blockquote"}], marks: {annotations: [{name: "link", title: "Link", type: "object", fields: [defineField({name: "href", title: "Address", type: "url", validation: (rule) => rule.uri({allowRelative: true, scheme: ["http", "https", "mailto"]})}), defineField({name: "openInNewTab", title: "Open in a new tab", type: "boolean", initialValue: false})]}]}}),
         defineArrayMember({type: "image", options: {hotspot: true}, fields: [defineField({name: "alt", title: "Alternative text", type: "string", validation: (rule) => rule.required()}), defineField({name: "caption", title: "Caption", type: "string"})]}),
+        defineArrayMember({type: "youtubeVideo"}),
         defineArrayMember({type: "editorialCallout"}),
       ],
       validation: (rule) => rule.required().min(1),
