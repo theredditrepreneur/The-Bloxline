@@ -1,5 +1,6 @@
 import type {Metadata} from "next"
 import Link from "next/link"
+import TikTokGallery, {type TikTokGalleryVideo} from "@/components/TikTokGallery"
 import {siteConfig} from "@/lib/site"
 
 export const metadata: Metadata = {
@@ -22,10 +23,10 @@ const packages = [
   {name: "Growth", price: "£499", detail: "per month", items: ["30 clips", "Priority turnaround", "Captions", "Hook optimisation", "Trend research"], featured: true},
   {name: "Studio", price: "£899", detail: "per month", items: ["60 clips", "Multiple games", "Priority support", "Performance report", "Monthly strategy"]},
 ]
-const recentClips: Array<{title: string, embedUrl?: string}> = [
-  {title: "Gameplay moment"},
-  {title: "Update highlight"},
-  {title: "Community clip"},
+const recentClips: TikTokGalleryVideo[] = [
+  {id: "gameplay-moment", videoUrl: "", title: "Gameplay moment", creator: "Add your TikTok link"},
+  {id: "update-highlight", videoUrl: "", title: "Update highlight", creator: "Add your TikTok link"},
+  {id: "community-clip", videoUrl: "", title: "Community clip", creator: "Add your TikTok link"},
 ]
 const faqs = [
   ["What footage do I need to provide?", "Gameplay recordings, trailers, update footage, livestream recordings, creator clips or any other material you have permission to use. We can help you decide what is most useful."],
@@ -50,7 +51,7 @@ export default function ShortFormContentClippingPage() {
 
     <section className="clipping-pricing"><div className="container"><div className="agency-section-head"><span className="eyebrow">Simple monthly support</span><h2>Choose the volume that fits your game.</h2></div><div className="clipping-pricing-grid">{packages.map((tier) => <article className={`pricing-card ${tier.featured ? "clipping-pricing-featured" : ""}`} key={tier.name}>{tier.featured && <span className="badge">Recommended</span>}<span className="eyebrow">{tier.name}</span><h3>{tier.price} <small>{tier.detail}</small></h3><ul>{tier.items.map((item) => <li key={item}>{item}</li>)}</ul><a className="button" href={discoveryLink}>Book a Discovery Call</a></article>)}</div></div></section>
 
-    <section className="clipping-examples" id="examples"><div className="container"><div className="agency-section-head"><span className="eyebrow">Portfolio</span><h2>Recent Clips</h2><p>Examples will appear here as TikTok videos are published. The layout supports responsive embedded clips when they are ready to add.</p></div><div className="clipping-tiktok-grid">{recentClips.map((clip) => clip.embedUrl ? <div className="tiktok-embed" key={clip.title}><iframe src={clip.embedUrl} title={clip.title} loading="lazy" allow="encrypted-media; picture-in-picture" /></div> : <article className="tiktok-placeholder" key={clip.title}><span className="eyebrow">TikTok</span><div><strong>{clip.title}</strong><p>Embedded clip placeholder</p></div><span className="tiktok-placeholder-mark" aria-hidden="true">♪</span></article>)}</div></div></section>
+    <section className="clipping-examples" id="examples"><div className="container"><div className="agency-section-head"><span className="eyebrow">Portfolio</span><h2>Recent Clips</h2><p>Examples will appear here as TikTok videos are published. The gallery is ready for responsive official TikTok embeds.</p></div><TikTokGallery videos={recentClips} /></div></section>
 
     <section className="service-section container"><div className="clipping-faq"><div><span className="eyebrow">Questions</span><h2>Frequently asked questions</h2></div><div>{faqs.map(([question, answer]) => <details key={question}><summary>{question}</summary><p>{answer}</p></details>)}</div></div></section>
 

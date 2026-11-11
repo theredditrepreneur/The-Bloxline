@@ -1355,6 +1355,16 @@
 .tiktok-placeholder-mark { position: relative; z-index: 1; font-size: 3.5rem; font-weight: 900; }
 .tiktok-embed { aspect-ratio: 9 / 15; overflow: hidden; background: var(--navy); }
 .tiktok-embed iframe { width: 100%; height: 100%; border: 0; }
+.tiktok-gallery { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
+.tiktok-card { min-width: 0; overflow: hidden; border: 1px solid var(--line); border-radius: 16px; background: #fff; box-shadow: 0 12px 28px rgba(8, 27, 56, .08); transition: transform 180ms ease, box-shadow 180ms ease; }
+.tiktok-card:hover { transform: translateY(-5px); box-shadow: 0 18px 36px rgba(8, 27, 56, .14); }
+.tiktok-card .tiktok-embed { width: 100% !important; min-width: 0 !important; max-width: none !important; margin: 0 !important; }
+.tiktok-loading { aspect-ratio: 9 / 15; background: linear-gradient(110deg, #edf4ff 20%, #f8fbff 40%, #edf4ff 60%); background-size: 200% 100%; animation: tiktok-loading 1.2s linear infinite; }
+.tiktok-card-meta { padding: 18px 20px 20px; }
+.tiktok-card-meta h3, .tiktok-card-invalid h3 { margin: 0; color: var(--navy); font-size: 1.12rem; }
+.tiktok-card-meta p, .tiktok-card-invalid p { margin: 5px 0 0; color: #475569; font-size: .95rem; }
+.tiktok-card-invalid { display: flex; aspect-ratio: 9 / 12; flex-direction: column; justify-content: flex-end; padding: 24px; background: linear-gradient(150deg, #edf4ff, #fff); }
+.tiktok-card-invalid .eyebrow { margin-bottom: auto; }
 .clipping-faq { display: grid; grid-template-columns: minmax(0, .85fr) minmax(360px, 1.15fr); gap: clamp(42px, 8vw, 112px); }
 .clipping-faq h2 { margin: 10px 0; font-size: clamp(2.35rem, 4vw, 3.8rem); }
 .clipping-faq details { border-top: 1px solid var(--line); padding: 20px 0; }
@@ -1368,13 +1378,13 @@
   .clipping-hero-inner, .clipping-deliverables, .clipping-faq { grid-template-columns: 1fr; }
   .clipping-hero-visual { min-height: 240px; }
   .clipping-source-grid { grid-template-columns: repeat(2, 1fr); }
-  .clipping-pricing-grid, .clipping-tiktok-grid { grid-template-columns: 1fr 1fr; }
+  .clipping-pricing-grid, .clipping-tiktok-grid, .tiktok-gallery { grid-template-columns: 1fr 1fr; }
 }
 
 @media (max-width: 600px) {
   .clipping-hero-inner { padding-top: 52px; padding-bottom: 52px; }
   .clipping-hero h1 { font-size: clamp(3rem, 14vw, 4.6rem); }
-  .clipping-benefit-grid, .clipping-source-grid, .clipping-pricing-grid, .clipping-tiktok-grid { grid-template-columns: 1fr; }
+  .clipping-benefit-grid, .clipping-source-grid, .clipping-pricing-grid, .clipping-tiktok-grid, .tiktok-gallery { grid-template-columns: 1fr; }
   .clipping-benefit-grid article { min-height: 0; }
   .clipping-hero-visual { min-height: 200px; }
   .clipping-actions { align-items: stretch; flex-direction: column; }
@@ -1383,6 +1393,10 @@
 
 @keyframes clipping-float {
   50% { transform: translateY(-9px); }
+}
+
+@keyframes tiktok-loading {
+  to { background-position: -200% 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {
