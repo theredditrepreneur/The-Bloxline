@@ -20,6 +20,7 @@ export const metadata: Metadata = {
 const services = [
   {title: "Bloxline Playtest", copy: "See your Roblox game through a player’s eyes. Independent recorded playtesting and structured feedback covering onboarding, gameplay, progression, friction and the overall player experience.", items: ["Recorded gameplay", "Independent first impression", "Think aloud observations", "Clear feedback report", "Bloxline Top 5 priorities"], href: "/services/playtest", cta: "Explore Playtest", price: "Starting from £79"},
   {title: "Roblox Community Building", copy: "For games and studios that want to turn players into an active community outside Roblox.", items: ["Reddit community strategy", "Subreddit creation and structure", "Rules and moderation setup", "Launch content", "Recurring community formats", "Player feedback systems", "Community management", "Community insight and reporting"], href: "/services/community-building", cta: "Explore Community Building", price: "Community launches from £495"},
+  {title: "Short Form Content Clipping", copy: "Turn gameplay, updates, trailers and developer footage into short form videos that keep your Roblox game visible on TikTok, Reels and YouTube Shorts.", items: ["Gameplay and trailer editing", "TikToks, Reels and Shorts", "Captions included", "Hook optimisation", "Optional thumbnails"], href: "/services/short-form-content-clipping", cta: "Explore Content Clipping", price: "Starting from £249 per month"},
 ]
 
 export default async function Home() {
@@ -35,7 +36,7 @@ export default async function Home() {
         <span className="eyebrow">Roblox Playtest And Community Services</span>
         <h1>Playtest the game. Build the community.</h1>
         <p>The Bloxline helps Roblox developers and studios see their games through a player’s eyes, then build stronger relationships with the people around them.</p>
-        <div className="agency-actions"><Link className="button" href="#services">Explore Services</Link><a className="button button-secondary" href={playtestEmail}>Talk About Your Game</a></div>
+        <div className="agency-actions"><Link className="button" href="/services">Explore Services</Link><a className="button button-secondary" href={playtestEmail}>Talk About Your Game</a></div>
         <small>Independent player feedback and community building for Roblox studios.</small>
       </div>
     </header>
@@ -46,12 +47,12 @@ export default async function Home() {
     </section>
 
     <section className="agency-services" id="services">
-      <div className="container"><div className="agency-section-head"><span className="eyebrow">What we do</span><h2>Two primary services for Roblox studios</h2></div><div className="agency-service-grid agency-service-grid-primary">{services.map((service) => <article className="agency-service-card" key={service.title}><h3>{service.title}</h3><p>{service.copy}</p><ul>{service.items.map((item) => <li key={item}>{item}</li>)}</ul><p className="service-detail"><strong>{service.price}</strong></p><Link className="text-link" href={service.href}>{service.cta}</Link></article>)}</div></div>
+      <div className="container"><div className="agency-section-head"><span className="eyebrow">What we do</span><h2>Core services for Roblox studios</h2></div><div className="agency-service-grid agency-service-grid-home">{services.map((service) => <article className="agency-service-card" key={service.title}><h3>{service.title}</h3><p>{service.copy}</p><ul>{service.items.map((item) => <li key={item}>{item}</li>)}</ul><p className="service-detail"><strong>{service.price}</strong></p><Link className="text-link" href={service.href}>{service.cta}</Link></article>)}</div></div>
     </section>
 
     <section className="agency-pricing-preview container">
       <div><span className="eyebrow">Clear starting prices</span><h2>Practical support for the game and its community.</h2><p>Get an independent player perspective before launch or an update. Then build a lasting community around the experience.</p></div>
-      <div className="agency-price-list"><Link href="/services/playtest#pricing"><span>Bloxline Playtest</span><strong>From £79</strong></Link><Link href="/services/community-building#pricing"><span>Community Launch</span><strong>£495 one time</strong></Link><Link href="/services/community-building#pricing"><span>Community Management</span><strong>From £395 per month</strong></Link></div>
+      <div className="agency-price-list"><Link href="/services/playtest#pricing"><span>Bloxline Playtest</span><strong>From £79</strong></Link><Link href="/services/community-building#pricing"><span>Community Launch</span><strong>£495 one time</strong></Link><Link href="/services/short-form-content-clipping"><span>Content Clipping</span><strong>From £249 per month</strong></Link><Link href="/services/community-building#pricing"><span>Community Management</span><strong>From £395 per month</strong></Link></div>
     </section>
 
     <section className="agency-proof">
