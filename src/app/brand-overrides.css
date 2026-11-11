@@ -98,6 +98,8 @@
 .game-thoughts .eyebrow { color: #72a7ff; }
 .game-thoughts p { margin: 0; font-size: 1.1rem; }
 .game-thoughts p + p { margin-top: 1.1em; }
+.game-thoughts .agency-proof-grid { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+.game-thoughts .agency-proof-grid > div:last-child { max-width: none; }
 .game-playtest-cta { background: var(--wash); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: clamp(42px, 5vw, 64px) 0; }
 .game-playtest-cta h2 { margin: 8px 0 14px; font-size: clamp(2rem, 4vw, 3.3rem); }
 .game-playtest-cta p { max-width: 680px; margin: 0 0 24px; font-size: 1.08rem; }
@@ -1303,6 +1305,88 @@
   .article-header .subtitle {
     max-width: 1080px;
   }
+}
+
+/* Short form content clipping */
+.clipping-hero { overflow: hidden; background: linear-gradient(135deg, #f8fbff 0%, #edf4ff 56%, #ffffff 100%); }
+.clipping-hero-inner { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(280px, .75fr); align-items: end; gap: clamp(42px, 7vw, 96px); padding-top: clamp(64px, 8vw, 112px); padding-bottom: clamp(64px, 8vw, 112px); }
+.clipping-hero h1 { max-width: 880px; margin: 12px 0 20px; font-size: clamp(3.5rem, 7vw, 6.8rem); }
+.clipping-hero p { max-width: 760px; margin: 0; font-size: clamp(1.15rem, 2vw, 1.4rem); line-height: 1.6; }
+.clipping-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; margin-top: 28px; }
+.clipping-hero-visual { min-height: 340px; position: relative; display: grid; align-content: end; gap: 10px; padding: 32px; overflow: hidden; background: var(--navy); color: #fff; }
+.clipping-hero-visual::before, .clipping-hero-visual::after { content: ""; position: absolute; width: 270px; height: 270px; border-radius: 50%; background: var(--blue); opacity: .92; }
+.clipping-hero-visual::before { top: -100px; right: -72px; }
+.clipping-hero-visual::after { bottom: -150px; left: -110px; background: #72a7ff; }
+.clipping-hero-visual span { position: relative; z-index: 1; width: max-content; padding: 7px 10px; background: #ffffff18; border: 1px solid #ffffff35; font-size: .75rem; font-weight: 900; letter-spacing: .09em; text-transform: uppercase; }
+.clipping-hero-visual span:nth-child(2) { margin-left: 14%; animation: clipping-float 4.5s ease-in-out infinite; }
+.clipping-hero-visual span:nth-child(3) { margin-left: 32%; animation: clipping-float 4.5s ease-in-out 1s infinite; }
+.clipping-benefit-grid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+.clipping-benefit-grid article { min-height: 260px; padding: 30px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.clipping-icon { display: block; font-size: 2rem; }
+.clipping-benefit-grid h3 { margin: 22px 0 12px; font-size: 1.65rem; }
+.clipping-benefit-grid p { margin: 0; color: #475569; }
+.clipping-sources { padding: clamp(56px, 7vw, 90px) 0; background: var(--navy); color: #d8e3f2; }
+.clipping-sources h2 { color: #fff; }
+.clipping-sources .eyebrow { color: #72a7ff; }
+.clipping-sources .agency-section-head p { max-width: 760px; font-size: 1.08rem; }
+.clipping-source-grid { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid #ffffff35; border-left: 1px solid #ffffff35; }
+.clipping-source-grid article { min-height: 150px; padding: 24px; border-right: 1px solid #ffffff35; border-bottom: 1px solid #ffffff35; }
+.clipping-source-grid span { color: #72a7ff; font-size: .7rem; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; }
+.clipping-source-grid h3 { margin: 12px 0 0; color: #fff; font-size: 1.35rem; }
+.clipping-deliverables { display: grid; grid-template-columns: minmax(0, 1fr) minmax(340px, .9fr); gap: clamp(36px, 7vw, 96px); align-items: start; }
+.clipping-deliverables h2 { margin: 10px 0 16px; font-size: clamp(2.35rem, 4vw, 3.8rem); }
+.clipping-deliverables p { max-width: 690px; color: #475569; font-size: 1.08rem; }
+.clipping-deliverables ul { margin: 0; padding: 0; list-style: none; border-top: 2px solid var(--navy); }
+.clipping-deliverables li { position: relative; padding: 15px 0 15px 24px; border-bottom: 1px solid var(--line); color: var(--navy); font-weight: 800; }
+.clipping-deliverables li::before { content: ""; position: absolute; top: 24px; left: 0; width: 8px; height: 8px; background: var(--blue); }
+.clipping-pricing { padding: clamp(56px, 7vw, 90px) 0; background: var(--wash); }
+.clipping-pricing-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.clipping-pricing-grid .pricing-card { min-height: 390px; }
+.clipping-pricing-featured { border-top: 5px solid var(--blue); box-shadow: 0 16px 40px rgba(8, 27, 56, .08); }
+.clipping-pricing-featured .badge { align-self: flex-start; margin-bottom: 16px; }
+.clipping-examples { padding: clamp(56px, 7vw, 90px) 0; }
+.clipping-tiktok-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
+.tiktok-placeholder { aspect-ratio: 9 / 15; position: relative; display: flex; flex-direction: column; justify-content: space-between; padding: 22px; overflow: hidden; background: var(--navy); color: #fff; }
+.tiktok-placeholder::after { content: ""; position: absolute; right: -84px; bottom: -84px; width: 220px; height: 220px; border-radius: 50%; background: var(--blue); }
+.tiktok-placeholder .eyebrow { color: #72a7ff; }
+.tiktok-placeholder > div { position: relative; z-index: 1; }
+.tiktok-placeholder strong { display: block; font-size: clamp(1.45rem, 3vw, 2.1rem); line-height: 1.08; }
+.tiktok-placeholder p { margin: 8px 0 0; color: #d8e3f2; }
+.tiktok-placeholder-mark { position: relative; z-index: 1; font-size: 3.5rem; font-weight: 900; }
+.tiktok-embed { aspect-ratio: 9 / 15; overflow: hidden; background: var(--navy); }
+.tiktok-embed iframe { width: 100%; height: 100%; border: 0; }
+.clipping-faq { display: grid; grid-template-columns: minmax(0, .85fr) minmax(360px, 1.15fr); gap: clamp(42px, 8vw, 112px); }
+.clipping-faq h2 { margin: 10px 0; font-size: clamp(2.35rem, 4vw, 3.8rem); }
+.clipping-faq details { border-top: 1px solid var(--line); padding: 20px 0; }
+.clipping-faq details:last-child { border-bottom: 1px solid var(--line); }
+.clipping-faq summary { color: var(--navy); cursor: pointer; font-size: 1.2rem; font-weight: 850; }
+.clipping-faq p { margin: 13px 28px 0 0; color: #475569; }
+.clipping-final .clipping-actions { justify-content: center; }
+.clipping-final .text-link { display: inline-block; margin-top: 26px; color: #72a7ff; }
+
+@media (max-width: 900px) {
+  .clipping-hero-inner, .clipping-deliverables, .clipping-faq { grid-template-columns: 1fr; }
+  .clipping-hero-visual { min-height: 240px; }
+  .clipping-source-grid { grid-template-columns: repeat(2, 1fr); }
+  .clipping-pricing-grid, .clipping-tiktok-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 600px) {
+  .clipping-hero-inner { padding-top: 52px; padding-bottom: 52px; }
+  .clipping-hero h1 { font-size: clamp(3rem, 14vw, 4.6rem); }
+  .clipping-benefit-grid, .clipping-source-grid, .clipping-pricing-grid, .clipping-tiktok-grid { grid-template-columns: 1fr; }
+  .clipping-benefit-grid article { min-height: 0; }
+  .clipping-hero-visual { min-height: 200px; }
+  .clipping-actions { align-items: stretch; flex-direction: column; }
+  .clipping-actions .button { text-align: center; }
+}
+
+@keyframes clipping-float {
+  50% { transform: translateY(-9px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .clipping-hero-visual span { animation: none; }
 }
 
 /* Full horizontal header mark supplied for The Bloxline. */
